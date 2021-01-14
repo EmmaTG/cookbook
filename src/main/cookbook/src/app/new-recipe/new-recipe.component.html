@@ -1,0 +1,95 @@
+<!--<p>new-recipe works!</p>-->
+<!--<div ng-template="header">-->
+<!--    <h2>New Recipe</h2>-->
+<!--</div>-->
+
+<form #newRecipe="ngForm" (submit)="onSubmit()">
+    <div class="p-field">
+        <div class="p-grid">
+          <label for="titleID" class="p-col-2">*Title: </label>
+          <input type="text" id="titleID" pInputText [(ngModel)]="recipe.title" name="title" class="p-col-10" required/>
+        </div>
+    </div>
+
+    <div class="p-field">
+        <div class="p-grid">
+          <label for="locationID" class="p-col-2">*Location: </label>
+          <input type="text" id="locationID" pInputText [(ngModel)]="recipe.location" name="location" class="p-col-10"/>
+        </div>
+    </div>
+
+    <div class="p-field">
+        <div class="p-grid">
+          <label class="p-col-2">*Cooking Time: </label>
+            <p-inputMask mask="99 hr 99 min" placeholder="   hr    min" id="cookTimeID" pInputText [(ngModel)]="recipe.cookTime" name="time" class="p-col-10 p-fluid" required></p-inputMask>
+        </div>
+    </div>
+
+    <div class="p-field">
+        <div class="p-grid">
+            <label class="p-col-2">*Ingredients: </label>
+                <p-chips [(ngModel)]="stringTags" name="stringTags" placeholder="Enter your ingredients separated by a comma" class="p-col-10 p-fluid" separator=","></p-chips>
+        </div>
+        <div class="p-grid">
+            <span class="p-col-2"></span>
+            <span class="ui-danger p-col-10">
+                <small>Enter the main ingredients of this recipe </small>
+            </span>
+        </div>
+    </div>
+
+    <div class="p-field">
+        <div class="p-grid">
+            <label class="p-col-2"> Notes: </label>
+            <textarea pInputTextarea [(ngModel)]="recipe.notes" name="notes" class="p-col-10"></textarea>
+        </div>
+    </div>
+    <small >* Required fields</small>
+
+    <div class="p-grid">
+        <div class="p-col-10"></div>
+        <p-button type="submit" icon="pi pi-check" label="Save" class="p-col-1"
+        [disabled]="!newRecipe.form.valid"></p-button>
+    <!--    <div class="p-col-1"></div>-->
+<!--        <p-button type="button" icon="pi pi-times" lable="Cancel" class="p-col-1"></p-button>-->
+    <!--    <div class="p-col-1"></div>-->
+    </div>
+</form>
+<!--    <div class="p-float-label">-->
+<!--      <input id="float-input" type="text" pInputText [(ngModel)]="recipe.title" name="title" aria-describedby="title-description"/>-->
+<!--      <label for="float-input">Title 2: </label>-->
+<!--        <p-button type="button" (click)="showDialog()" icon="pi pi-eye" label="Show"></p-button>-->
+<!--        <p-dialog header="Title" [(visible)]="display" [style]="{width: '50vw'}" position="right">-->
+
+<!--            <div class="p-field">-->
+<!--                <label for="title">Title: </label>-->
+<!--                <input type="text" id="title" pInputText [(ngModel)]="recipe.title" name="title"/>-->
+<!--            </div>-->
+<!--        </p-dialog>-->
+<!--        <br>-->
+<!--          <small id="title-description"> Title of the recipe</small>-->
+<!--    </div>-->
+
+<!--<form [formGroup]="newRecipe" (ngSubmit)="onSubmit()">-->
+<!--  <label for="title">-->
+<!--    Name:-->
+<!--  </label>-->
+<!--  <input id=title type="text" formControlName="title" name="title" required>-->
+<!--  <br>-->
+<!--  <label for="location">-->
+<!--    Location of recipe:-->
+<!--  </label>-->
+<!--  <input id=location type="text" formControlName="location" name="location" required>-->
+<!--  <br>-->
+<!--  <label for="cookTime">-->
+<!--    Time to cook:-->
+<!--  </label>-->
+<!--  <input id=cookTime type="text" formControlName="cookTime" name="cookTime" required>-->
+<!--  <br>-->
+<!--  <label for="tags">-->
+<!--    Tags:-->
+<!--  </label>-->
+<!--  <textarea id=tags placeholder="enter tags separated by a ;" formControlName="tags" name="tags"></textarea>-->
+<!--  <br>-->
+<!--  <button type="submit"> Submit</button><button>Cancel</button>-->
+<!--</form>-->

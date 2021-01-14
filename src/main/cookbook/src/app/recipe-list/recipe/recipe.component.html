@@ -1,0 +1,7 @@
+<div *ngIf="recipe">
+    <button p
+    <h3>{{recipe.title}}</h3>
+    <h4>Do you want to make this today?</h4>
+    <p-confirmPopup></p-confirmPopup>
+    <button pButton icon="pi pi-check" (click)="confirm($event)" [class]="buttonStyle" [disabled]="made"></button>
+</div>

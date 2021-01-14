@@ -1,0 +1,29 @@
+<div class="p-grid">
+    <div class="p-col-1">
+    </div>
+    <div class="p-col-2">
+        <p-button type="text" [routerLink]="['/home']" icon="pi pi-home" label="Back"></p-button>
+    </div>
+    <div class="p-col-2 p-offset-6">
+        <p-button type="text" (click)="display = true" icon="pi pi-plus" label="New Recipe"></p-button>
+        <p-dialog header="New Recipe" [(visible)]="display" position="right" [style]="{width: '50vw'}">
+            <app-new-recipe (saved)="onSaved($event)"></app-new-recipe>
+        </p-dialog>
+    </div>
+</div>
+<div class="p-grid">
+    <div class="p-col-6 p-offset-4">
+        <label class="" style="width:100px">Ingredients: </label>
+        <p-chips id="tags" [(ngModel)]="tags" class="p-col" placeholder="Enter your ingredients separated by a comma" separator="," (onAdd)="onAdd()" (onRemove)="onRemove()"></p-chips>
+    </div>
+</div>
+
+<div class="p-grid">
+    <div class="p-col-2">
+
+            <app-list [tags]="tags" [update]="update" (recipe)="selected($event)" ></app-list>
+    </div>
+    <div class="p-col-10">
+        <app-recipe [recipe]="selectedRecipe"></app-recipe>
+    </div>
+</div>

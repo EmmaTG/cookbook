@@ -1,0 +1,31 @@
+<div class="p-grid">
+    <span class="p-col-12"></span>
+</div>
+<div class="p-grid">
+    <div class="p-col-8">
+    </div>
+<!--    <div class="p-col-4"></div>-->
+    <div class="p-col-2">
+        <p-button type="text" (click)="display = true" icon="pi pi-plus" label="New Recipe"></p-button>
+        <p-dialog header="New Recipe" [(visible)]="display" position="right" [style]="{width: '50vw'}">
+            <app-new-recipe (saved)="onSaved($event)"></app-new-recipe>
+        </p-dialog>
+    </div>
+</div>
+<div class="p-grid">
+    <div class="p-col-12">
+        <div style="text-align: center">
+            <h1>Welcome :)</h1>
+            <h3>With what ingredients do you want to cook?</h3>
+        </div>
+    </div>
+</div>
+<div class="p-grid">
+    <div class="p-col-3"></div>
+    <div class="p-col-6">
+        <span class="p-fluid">
+            <p-chips [(ngModel)]="tags" placeholder="Enter your ingredients separated by a comma" separator=","></p-chips>
+            <p-button label="Find a recipe" [routerLink]="['/recipes']" [queryParams]="{tags: tags}" [disabled]="tags.length<1"></p-button>
+        </span>
+    </div>
+</div>

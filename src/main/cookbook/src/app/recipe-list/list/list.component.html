@@ -1,0 +1,15 @@
+<h2>Recipes</h2>
+<p-dropdown [options]="sortByOptions" [(ngModel)]="sortBy" optionLabel="label" optionValue="value" placeholder="Sort by" (onChange)="sortByOption()" class="p-fluid"></p-dropdown>
+<p-table [value]="recipes" selectionMode="single" [(selection)]="selectedRecipe" (onRowSelect)="onRowSelect($event)">
+    <ng-template p-template="header">
+        <tr>
+            <th> Recipe</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-recipe>
+        <tr [pSelectableRow]="recipe">
+            <td>{{recipe.title}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
