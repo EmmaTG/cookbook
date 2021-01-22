@@ -8,6 +8,7 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputMaskModule} from 'primeng/inputmask';
 import {ChipsModule} from 'primeng/chips';
+import {ChipModule} from 'primeng/chip';
 import {TableModule} from 'primeng/table';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
@@ -31,6 +32,7 @@ import { NewRecipeModule } from '../new-recipe/new-recipe.module';
             InputTextareaModule,
             InputMaskModule,
             ChipsModule,
+            ChipModule,
             DialogModule,
             ButtonModule,
             TableModule,

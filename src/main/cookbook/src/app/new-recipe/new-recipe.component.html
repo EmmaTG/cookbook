@@ -29,19 +29,22 @@
         <div class="p-grid">
             <label class="p-col-2">*Ingredients: </label>
                 <p-chips [(ngModel)]="stringTags" name="stringTags" placeholder="Enter your ingredients separated by a comma" class="p-col-10 p-fluid" separator=","></p-chips>
+            <div class="p-col"></div>
         </div>
         <div class="p-grid">
             <span class="p-col-2"></span>
             <span class="ui-danger p-col-10">
                 <small>Enter the main ingredients of this recipe </small>
             </span>
+            <div class="p-col"></div>
         </div>
     </div>
 
     <div class="p-field">
         <div class="p-grid">
             <label class="p-col-2"> Notes: </label>
-            <textarea pInputTextarea [(ngModel)]="recipe.notes" name="notes" class="p-col-10"></textarea>
+            <textarea pInputTextarea [(ngModel)]="recipe.notes" name="notes" class="p-col-9"></textarea>
+            <div class="p-col"></div>
         </div>
     </div>
     <small >* Required fields</small>
@@ -50,7 +53,8 @@
         <div class="p-col-10"></div>
         <p-button type="submit" icon="pi pi-check" label="Save" class="p-col-1"
         [disabled]="!newRecipe.form.valid"></p-button>
-    <!--    <div class="p-col-1"></div>-->
+        <div class="p-col"></div>
+        <!--    <div class="p-col-1"></div>-->
 <!--        <p-button type="button" icon="pi pi-times" lable="Cancel" class="p-col-1"></p-button>-->
     <!--    <div class="p-col-1"></div>-->
     </div>

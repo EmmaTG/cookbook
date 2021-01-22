@@ -31,7 +31,7 @@ public class RecipeController {
 
     //Get recipe by Id
     @GetMapping("/recipes/{id}")
-    public Recipe getRecipe(@PathVariable(value = "id") Long id){
+    public Recipe getRecipeById(@PathVariable(value = "id") Long id){
         return recipeService.getRecipeByID(id).orElse(null);
     }
 
@@ -47,7 +47,7 @@ public class RecipeController {
 
     //Add new recipe
     @PostMapping("/recipes")
-    public Recipe saveNewRecipe(@RequestBody @Valid Recipe newRecipe){
+    public Recipe saveRecipe(@RequestBody @Valid Recipe newRecipe){
         List<Tag> tags = newRecipe.getTags();
         List<Tag> newTags = new ArrayList<>();
         for (Tag tag: tags){
@@ -63,7 +63,7 @@ public class RecipeController {
 
     //Update recipe details
     @PutMapping("/recipes/{id}")
-    public Recipe updateNewRecipe(@PathVariable(value = "id") Long id, @RequestBody @Valid Recipe newRecipe){
+    public Recipe updateRecipe(@PathVariable(value = "id") Long id, @RequestBody @Valid Recipe newRecipe){
         return recipeService.updateRecipe(id,newRecipe);
     }
 

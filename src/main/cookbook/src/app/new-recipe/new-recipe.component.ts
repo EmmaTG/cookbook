@@ -16,7 +16,7 @@ import { Tag } from '../@api/models/tag'
 
 export class NewRecipeComponent implements OnInit{
 
-    @Output() saved: EventEmitter<any> = new EventEmitter();
+    @Output() saved: EventEmitter<boolean> = new EventEmitter();
 
     display: boolean = false;
 

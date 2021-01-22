@@ -5,14 +5,15 @@ import {ConfirmationService} from 'primeng/api';
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css']
+  styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent implements OnInit, OnChanges {
 
     @Input() recipe: Recipe;
 
-    made: boolean = false;
-    buttonStyle: string = "p-button-outlined"
+    made: boolean = false
+    edit: boolean =false;
+    buttonStyle: string = "p-button-outlined";
 
     constructor(private confirmationService: ConfirmationService) { }
 
@@ -27,11 +28,15 @@ export class RecipeComponent implements OnInit, OnChanges {
                 this.changeButtonStyle();
             },
             reject: () => {
-                console.log('rejected')
+                console.log('rejected');
                 this.made = false;
                 this.changeButtonStyle();
             }
         })
+    }
+
+    editRecipe(): void{
+        this.edit=true;
     }
 
     ngOnInit(): void {
@@ -49,6 +54,15 @@ export class RecipeComponent implements OnInit, OnChanges {
                 }
             }
         }
+    }
+
+    onSave() {
+        console.log(this.recipe)
+        this.edit = false;
+    }
+
+    onCancel() {
+        this.edit = false;
     }
 
     onClick(){
