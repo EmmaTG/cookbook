@@ -13,6 +13,7 @@ import {TableModule} from 'primeng/table';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {FieldsetModule} from 'primeng/fieldset';
 import {ConfirmationService} from 'primeng/api';
 
 import { RecipeListRoutingModule } from './recipe-list-routing.module';
@@ -39,6 +40,7 @@ import { NewRecipeModule } from '../new-recipe/new-recipe.module';
             SelectButtonModule,
             DropdownModule,
             ConfirmPopupModule,
+            FieldsetModule,
             FormsModule,
         ],
     providers: [ConfirmationService]

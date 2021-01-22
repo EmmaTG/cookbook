@@ -20,12 +20,7 @@ export class NewRecipeComponent implements OnInit{
 
     display: boolean = false;
 
-    showDialog() {
-        this.display=true;
-    }
-
     stringTags: string[];
-
 
     recipe: Recipe;
 
@@ -59,6 +54,7 @@ export class NewRecipeComponent implements OnInit{
             }
         console.log(this.recipe);
         this.recipesService.saveRecipe(this.recipe).subscribe(successResponse => {
+            this.newRecipe();
             this.saved.emit(false)
         }, errorResponse => {
             console.log("error");

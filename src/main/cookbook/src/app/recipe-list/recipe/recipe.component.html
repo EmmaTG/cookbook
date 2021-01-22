@@ -1,126 +1,130 @@
-<div *ngIf="recipe && !edit">
+<div *ngIf="recipe">
+    <p-fieldset [legend]="recipe.title" [style]="{'width':'75%'}">
+        <div *ngIf="!edit">
 
-    <div class="p-grid p-jc-start">
-        <div class="p-col-7">
-            <h2>{{recipe.title}}</h2>
-        </div>
-
-        <div class="p-col-1">
-            <button pButton icon="pi pi-pencil" (click)="editRecipe()" label="Edit"></button>
-        </div>
-    </div>
-
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Ingredients: </h4>
-        </div>
-
-        <div class="p-d-flex p-ai-center">
-            <div *ngFor="let tag of recipe.tags">
-                    <p-chip styleClass="p-mr-2 custom-chip"> {{ tag.tagName }} </p-chip>
-            </div>
-        </div>
-    </div>
-
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Cooking time: </h4>
-        </div>
-
-        <div class="p-col">
-            <p>{{recipe.cookTime}}</p>
-        </div>
-    </div>
-
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Last made on: </h4>
-        </div>
-
-        <div class="p-col">
-            <p>{{recipe.dateLastMade || 'Never'}}</p>
-        </div>
-    </div>
-
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Notes: </h4>
-        </div>
-
-        <div class="p-col">
-            <p>{{recipe.notes}}</p>
-        </div>
-    </div>
-
-    <div class="p-grid">
-        <div class="p-col-3">
-            <h4>Do you want to make this today?</h4>
-        </div>
-
-        <div class="p-col-4">
-            <p-confirmPopup></p-confirmPopup>
-            <button pButton icon="pi pi-check" (click)="confirm($event)" [class]="buttonStyle" [disabled]="made"></button>
-        </div>
-    </div>
-
-</div>
-
-<div *ngIf="recipe && edit">
-    <form #editRecipe="ngForm" (submit)="onSave()">
-        <div class="p-field">
             <div class="p-grid p-jc-start">
-                <input pInputText type="text" id="titleID" [(ngModel)]="recipe.title" value="{{recipe.title}}" name="title" class="p-col-7" required/>
+                <div class="p-col">
+                </div>
 
                 <div class="p-col-1">
-                    <button pButton icon="pi pi-pencil" class="p-button-success" (click)="onSave()" label="Save"></button>
-                </div>
-                <div class="p-col-2">
-                    <button pButton icon="pi pi-times" class="p-button-danger" (click)="onCancel()" label="Cancel"></button>
+                    <button pButton icon="pi pi-pencil" (click)="editRecipe()" label="Edit"></button>
                 </div>
             </div>
 
-        </div>
-
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Ingredients: </h4>
-        </div>
-
-        <div class="p-d-flex p-ai-center">
-                <p-chips styleClass="p-mr-2 custom-chip" separator="," [(ngModel)]="recipe.tags" name="tags" field="tagName"> </p-chips>
-        </div>
-    </div>
-
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Cooking time: </h4>
-        </div>
-
-        <div class="p-field">
             <div class="p-grid p-jc-start">
-                <input pInputText type="text" id="cookTimeID" [(ngModel)]="recipe.cookTime" value="{{recipe.cookTime}}" name="cookTime" class="p-col" required/>
+                <div class="p-col-2">
+                    <h4>Ingredients: </h4>
+                </div>
+
+                <div class="p-d-flex p-ai-center">
+                    <div *ngFor="let tag of recipe.tags">
+                            <p-chip styleClass="p-mr-2 custom-chip"> {{ tag.tagName }} </p-chip>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="p-grid p-jc-start">
-        <div class="p-col-2">
-            <h4>Last made on: </h4>
-        </div>
+            <div class="p-grid p-jc-start">
+                <div class="p-col-2">
+                    <h4>Cooking time: </h4>
+                </div>
 
-        <div class="p-col">
-            <p>{{recipe.dateLastMade || 'Never'}}</p>
-        </div>
-    </div>
+                <div class="p-col">
+                    <p>{{recipe.cookTime}}</p>
+                </div>
+            </div>
 
-        <div class="p-field">
-            <div class="p-grid">
+            <div class="p-grid p-jc-start">
+                <div class="p-col-2">
+                    <h4>Last made on: </h4>
+                </div>
+
+                <div class="p-col">
+                    <p>{{recipe.dateLastMade || 'Never'}}</p>
+                </div>
+            </div>
+
+            <div class="p-grid p-jc-start">
                 <div class="p-col-2">
                     <h4>Notes: </h4>
                 </div>
-                <textarea pInputTextarea [(ngModel)]="recipe.notes" name="notes" value="{{recipe.notes}}" class="p-col"></textarea>
+
+                <div class="p-col">
+                    <p>{{recipe.notes}}</p>
+                </div>
             </div>
+
+            <div class="p-grid">
+                <div class="p-col-3">
+                    <h4>Do you want to make this today?</h4>
+                </div>
+
+                <div class="p-col-4">
+                    <p-confirmPopup></p-confirmPopup>
+                    <button pButton icon="pi pi-check" (click)="confirm($event)" [class]="buttonStyle" [disabled]="made"></button>
+                </div>
+            </div>
+
         </div>
 
-    </form>
+        <div *ngIf="edit">
+            <form #editRecipe="ngForm" (submit)="onSave()">
+                <div class="p-field">
+                    <div class="p-grid p-formgrid">
+                        <div class="p-col">
+                            <input pInputText type="text" id="titleID" [(ngModel)]="recipe.title" value="{{recipe.title}}"
+                                   name="title" [style]="{'width': '100%'}" required/>
+                        </div>
+                        <div class="p-col-2 center-content">
+                            <button pButton icon="pi pi-pencil" class="p-button-success" (click)="onSave()" label="Save"
+                            ></button>
+                        </div>
+                        <div class="p-col-2 center-content">
+                            <button pButton icon="pi pi-times" class="p-button-danger" (click)="onCancel()" label="Cancel"></button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-grid p-formgrid">
+                    <div class="p-col-2">
+                        <h4>Ingredients: </h4>
+                    </div>
+                    <div class="p-col">
+                            <p-chips styleClass="p-mr-2 custom-chip" separator="," [(ngModel)]="recipe.tags" name="tags" field="tagName"> </p-chips>
+                    </div>
+                </div>
+
+                <div class="p-grid p-formgrid">
+                    <div class="p-col-2">
+                        <h4>Cooking time: </h4>
+                    </div>
+                    <div class="p-col">
+                        <input pInputText type="text" id="cookTimeID" [(ngModel)]="recipe.cookTime" value="{{recipe.cookTime}}" name="cookTime" required/>
+                    </div>
+                </div>
+
+                <div class="p-grid p-formgrid">
+                    <div class="p-col-2">
+                        <h4>Last made on: </h4>
+                    </div>
+                    <div class="p-col">
+                        <p>{{recipe.dateLastMade || 'Never'}}</p>
+                    </div>
+                </div>
+
+                <div class="p-grid p-formgrid">
+                    <div class="p-field">
+                        <div class="p-col-2">
+                            <h4>Notes: </h4>
+                        </div>
+                        <div class="p-col">
+                            <textarea pInputTextarea [(ngModel)]="recipe.notes" name="notes" value="{{recipe.notes}}"
+                                      [style]="{'width': '100%'}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </p-fieldset>
 </div>
