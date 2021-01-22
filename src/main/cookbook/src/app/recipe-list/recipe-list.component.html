@@ -25,6 +25,6 @@
             <app-list [tags]="tags" [update]="update" (recipe)="selected($event)" ></app-list>
     </div>
     <div class="p-col-10">
-        <app-recipe [recipe]="selectedRecipe"></app-recipe>
+        <app-recipe [recipe]="selectedRecipe" (recipeUpdated)="onUpdateList($event)"></app-recipe>
     </div>
 </div>

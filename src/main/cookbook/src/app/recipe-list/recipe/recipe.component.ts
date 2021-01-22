@@ -1,6 +1,9 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../../@api/models/recipe';
+import { RecipesService } from '../../@api/services/recipes.service';
+
 import {ConfirmationService} from 'primeng/api';
+
 
 @Component({
   selector: 'app-recipe',
@@ -10,34 +13,15 @@ import {ConfirmationService} from 'primeng/api';
 export class RecipeComponent implements OnInit, OnChanges {
 
     @Input() recipe: Recipe;
+    @Output() recipeUpdated: EventEmitter<boolean> = new EventEmitter();
 
     made: boolean = false
     edit: boolean =false;
     buttonStyle: string = "p-button-outlined";
+    editingRecipe: Recipe;
 
-    constructor(private confirmationService: ConfirmationService) { }
-
-    confirm(event: Event) {
-        this.confirmationService.confirm({
-            target:event.target,
-            message: "Are you sure you want to make this today?",
-            icon: 'pi pi-question-circle',
-            accept: ()=> {
-                console.log('accepted, run update to lastmade field indatabase')
-                this.made = true;
-                this.changeButtonStyle();
-            },
-            reject: () => {
-                console.log('rejected');
-                this.made = false;
-                this.changeButtonStyle();
-            }
-        })
-    }
-
-    editRecipe(): void{
-        this.edit=true;
-    }
+    constructor(private confirmationService: ConfirmationService,
+                private recipesService: RecipesService) { }
 
     ngOnInit(): void {
     }
@@ -56,12 +40,57 @@ export class RecipeComponent implements OnInit, OnChanges {
         }
     }
 
-    onSave() {
-        console.log(this.recipe)
-        this.edit = false;
+    confirm(event: Event, recipe: Recipe) {
+        this.confirmationService.confirm({
+            target:event.target,
+            message: "Are you sure you want to make this today?",
+            icon: 'pi pi-question-circle',
+            accept: ()=> {
+                this.recipesService.updateLastMadeDate(recipe.id).subscribe(successResponse => {
+                        this.recipe = successResponse;
+                        this.made = true;
+                        this.changeButtonStyle();
+                        this.recipeUpdated.emit(true);
+                    }, errorResponse => {
+                        console.log('Error!!');
+                    });
+            },
+            reject: () => {
+                console.log('rejected');
+                this.made = false;
+                this.changeButtonStyle();
+            }
+        })
+    }
+
+    onSave(event: Event) {
+        this.confirmationService.confirm({
+            target: event.target,
+            message: "Are you sure you want to edit this recipe?",
+            icon: 'pi pi-question-circle',
+            accept: ()=> {
+                this.recipesService.updateRecipe(this.editingRecipe).subscribe(successResponse => {
+                        this.recipe = successResponse;
+                        this.recipeUpdated.emit(true);
+                        this.edit = false;
+                        this.editingRecipe= null;
+                    }, errorResponse => {
+                        console.log('Error!!');
+                    });
+            },
+            reject: () => {
+                console.log('rejected');
+            }
+        })
+    }
+
+    editRecipe(): void{
+        this.edit=true;
+        this.editingRecipe = {...this.recipe};
     }
 
     onCancel() {
+        this.editingRecipe=null;
         this.edit = false;
     }
 

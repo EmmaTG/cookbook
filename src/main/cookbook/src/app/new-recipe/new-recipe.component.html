@@ -4,7 +4,11 @@
         <div class="p-grid">
           <label for="titleID" class="p-col-2">*Title: </label>
             <div class="p-col">
-                <input type="text" id="titleID" pInputText [(ngModel)]="recipe.title" name="title"  [style]="{'width':'100%'}" required/>
+                <input type="text" id="titleID" pInputText [(ngModel)]="recipe.title" name="title"
+                       #title="ngModel" [style]="{'width':'100%'}" required/>
+                <div *ngIf="title.errors && (title.dirty || title.touched)" style="color: red" class="error">
+                    An approximate cook time is Required
+                </div>
             </div>
         </div>
     </div>
@@ -23,7 +27,11 @@
           <label class="p-col-2">*Cooking Time: </label>
             <div class="p-col">
                 <p-inputMask mask="99 hr 99 min" placeholder="   hr    min" id="cookTimeID" pInputText
-                             [(ngModel)]="recipe.cookTime" name="time" [style]="{'width':'100%'}" required></p-inputMask>
+                             [(ngModel)]="recipe.cookTime" name="time" #cookTime="ngModel"
+                             [style]="{'width':'100%'}" required></p-inputMask>
+                <div *ngIf="cookTime.errors && (cookTime.dirty || cookTime.touched)" style="color: red" class="error">
+                    An approximate cook time is Required
+                </div>
             </div>
         </div>
     </div>
@@ -31,8 +39,11 @@
     <div class="p-field">
         <div class="p-grid p-formgrid">
             <label class="p-col-2">*Ingredients: </label>
-                <p-chips [(ngModel)]="stringTags" name="stringTags" placeholder="Enter your ingredients separated by a comma"
-                         class="p-col-10 p-fluid" separator=","></p-chips>
+                <p-chips [(ngModel)]="stringTags" name="tags" placeholder="Enter your ingredients separated by a comma"
+                         class="p-col-10 p-fluid" separator="," #tags="ngModel"></p-chips>
+            <div *ngIf="stringTags.length<1 && (tags.dirty || tags.touched)" style="color: red" class="error">
+                At least one ingredient is Required
+            </div>
             <div class="p-col"></div>
         </div>
         <div class="p-grid">

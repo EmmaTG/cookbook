@@ -68,7 +68,7 @@ public class RecipeController {
     }
 
     //update recipe LastMade date
-    @PutMapping("/recipe/made/{id}")
+    @PutMapping("/recipes/made/{id}")
     public Recipe updateLastMadeDate(@PathVariable(value = "id") Long id){
         return recipeService.updateLastMade(id);
     }

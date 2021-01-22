@@ -44,6 +44,10 @@ export class RecipeListComponent implements OnInit {
         });
     }
 
+    onUpdateList(event: Event){
+        this.update=true;
+    }
+
     selected(event: any): void {
         this.selectedRecipe= event;
     }

@@ -28,4 +28,16 @@ export class RecipesService {
     const options = tags? {params: new HttpParams().set('tagsString', params)} : {};
     return this.http.get<Recipe[]>(this.rootURL + '/recipes/tags', options);
     }
+
+    updateRecipe(recipeToUpdate: Recipe): Observable<Recipe>{
+    return this.http.put<Recipe>(this.rootURL + '/recipes/' + recipeToUpdate.id,recipeToUpdate)
+    }
+
+    updateLastMadeDate(madeRecipeId: number): Observable<Recipe>{
+    return this.http.put<Recipe>(this.rootURL + '/recipes/made/' + madeRecipeId, null)
+    }
+
+    deleteRecipe(recipeToDeleteId: number): void{
+        this.http.delete(this.rootURL+'/recipes/' + recipeToDeleteId)
+    }
 }
