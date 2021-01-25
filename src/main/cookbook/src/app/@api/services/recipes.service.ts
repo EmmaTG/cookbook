@@ -37,7 +37,7 @@ export class RecipesService {
     return this.http.put<Recipe>(this.rootURL + '/recipes/made/' + madeRecipeId, null)
     }
 
-    deleteRecipe(recipeToDeleteId: number): void{
-        this.http.delete(this.rootURL+'/recipes/' + recipeToDeleteId)
+    deleteRecipe(recipeToDeleteId: number): Observable<any>{
+        return this.http.delete(this.rootURL+'/recipes/' + recipeToDeleteId)
     }
 }

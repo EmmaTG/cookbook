@@ -4,13 +4,16 @@
         <div *ngIf="!edit">
 
             <div class="p-grid p-jc-start">
-                <div class="p-col">
+                <div class="p-col-8">
                 </div>
 
                 <div class="p-col-1">
-                    <button pButton icon="pi pi-pencil" (click)="editRecipe()" label="Edit"></button>
+                    <button pButton icon="pi pi-pencil" class="p-button-primary" (click)="editRecipe()" label="Edit"></button>
                 </div>
                 <div class="p-col-1"></div>
+                <div class="p-col-1">
+                    <button pButton icon="pi pi-times" class="p-button-danger" (click)="deleteRecipe(recipe)" label="Delete"></button>
+                </div>
             </div>
             <div class="p-grid">
                 <div class="p-col-8">

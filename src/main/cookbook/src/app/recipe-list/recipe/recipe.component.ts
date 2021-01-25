@@ -100,7 +100,15 @@ export class RecipeComponent implements OnInit, OnChanges {
         this.editingRecipe = {...this.recipe};
         this.tagStrings = this.editingRecipe.tags.map(tag => tag.tagName);
         console.log(this.tagStrings);
+    }
 
+    deleteRecipe(recipeToDelete: Recipe){
+        this.recipesService.deleteRecipe(recipeToDelete.id).subscribe(() => {
+            this.recipeUpdated.emit(true);
+            console.log('Success!');
+        }, errorResponse => {
+            console.log('Error');
+        })
     }
 
     onCancel() {

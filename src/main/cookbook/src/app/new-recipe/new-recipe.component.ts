@@ -52,14 +52,12 @@ export class NewRecipeComponent implements OnInit{
             newTag.tagName = tag.toLowerCase();
             this.recipe.tags.push(newTag);
             }
-        console.log(this.recipe);
         this.recipesService.saveRecipe(this.recipe).subscribe(successResponse => {
-            this.newRecipe();
             this.saved.emit(false)
+            this.newRecipe();
         }, errorResponse => {
             console.log("error");
         });
-        this.newRecipe();
     }
 
   updateName() {

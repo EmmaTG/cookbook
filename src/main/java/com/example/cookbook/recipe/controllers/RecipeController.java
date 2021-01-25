@@ -70,6 +70,23 @@ public class RecipeController {
     //Update recipe details
     @PutMapping("/recipes/{id}")
     public Recipe updateRecipe(@PathVariable(value = "id") Long id, @RequestBody @Valid Recipe newRecipe){
+        List<Tag> tags = newRecipe.getTags();
+        tags= tags.stream()
+                .map(val -> {
+                    val.setTagName(val.getTagName().toLowerCase());
+                    return val;
+                })
+                .collect(Collectors.toList());
+        List<Tag> newTags = new ArrayList<>();
+        for (Tag tag: tags){
+            Tag foundTag = recipeService.getTagByName(tag.getTagName())
+                    .orElse(tag);
+            if (!foundTag.getRecipes().contains(newRecipe)) {
+                foundTag.getRecipes().add(newRecipe);
+            }
+            newTags.add(foundTag);
+        }
+        newRecipe.setTags(newTags);
         return recipeService.updateRecipe(id,newRecipe);
     }
 

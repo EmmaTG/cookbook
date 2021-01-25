@@ -42,6 +42,7 @@ public class RecipeService {
         recipeToUpdate.setTitle(newRecipe.getTitle());
         recipeToUpdate.setLocation(newRecipe.getLocation());
         recipeToUpdate.setCookTime(newRecipe.getCookTime());
+        recipeToUpdate.setDateLastMade(newRecipe.getDateLastMade());
         recipeToUpdate.setTags(newRecipe.getTags());
         return recipeRepo.save(recipeToUpdate);
     }
