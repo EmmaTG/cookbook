@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../../@api/models/recipe';
+import { Tag } from '../../@api/models/tag';
 import { RecipesService } from '../../@api/services/recipes.service';
 
 import {ConfirmationService} from 'primeng/api';
@@ -15,10 +16,11 @@ export class RecipeComponent implements OnInit, OnChanges {
     @Input() recipe: Recipe;
     @Output() recipeUpdated: EventEmitter<boolean> = new EventEmitter();
 
-    made: boolean = false
+    made: boolean = false;
     edit: boolean =false;
     buttonStyle: string = "p-button-outlined";
     editingRecipe: Recipe;
+    tagStrings: string[];
 
     constructor(private confirmationService: ConfirmationService,
                 private recipesService: RecipesService) { }
@@ -69,11 +71,20 @@ export class RecipeComponent implements OnInit, OnChanges {
             message: "Are you sure you want to edit this recipe?",
             icon: 'pi pi-question-circle',
             accept: ()=> {
+                this.editingRecipe.tags = []
+                for (var tag of this.tagStrings){
+                    let newTag: Tag = { tagId: null, tagName: ""}
+                    newTag.tagName = tag.toLowerCase();
+                    this.editingRecipe.tags.push(newTag);
+                }
+                console.log(this.editingRecipe)
                 this.recipesService.updateRecipe(this.editingRecipe).subscribe(successResponse => {
                         this.recipe = successResponse;
+                        console.log(this.recipe);
                         this.recipeUpdated.emit(true);
-                        this.edit = false;
                         this.editingRecipe= null;
+                        this.tagStrings=[];
+                        this.edit = false;
                     }, errorResponse => {
                         console.log('Error!!');
                     });
@@ -87,6 +98,9 @@ export class RecipeComponent implements OnInit, OnChanges {
     editRecipe(): void{
         this.edit=true;
         this.editingRecipe = {...this.recipe};
+        this.tagStrings = this.editingRecipe.tags.map(tag => tag.tagName);
+        console.log(this.tagStrings);
+
     }
 
     onCancel() {
@@ -105,6 +119,18 @@ export class RecipeComponent implements OnInit, OnChanges {
         } else {
             this.buttonStyle="p-button-outlined"
         }
+    }
+
+
+    dateFormat(date: string): string{
+    var year = date.substring(0,4);
+    var month = date.substring(5,7);
+    var day = date.substring(8,10);
+
+    let recipeDate= day + "-" + month + "-" + year
+
+    let dateFormatted = new Date(date);
+        return dateFormatted.toDateString();
     }
 
 }

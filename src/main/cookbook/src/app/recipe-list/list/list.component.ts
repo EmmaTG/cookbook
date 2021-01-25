@@ -17,13 +17,14 @@ export class ListComponent implements OnInit, OnChanges {
     @Output() recipe: EventEmitter<Recipe> = new EventEmitter();
 
     selectedRecipe: Recipe;
-    recipes: Recipe[];
+    recipes: Recipe[]=[];
 
-    sortBy: string = "";
+    sortBy: string = "tagName";
     sortByOptions: {label: string, value: string}[] = [
+        { label: "Relevance", value: "tagName"},
         { label: "Cooking time", value: "cookTime"},
         { label: "Date last made", value: "dateLastMade"},
-        { label: "Title", value: "title"}
+        { label: "Title", value: "title"},
         ]
 
     constructor(private recipesService: RecipesService,
@@ -39,12 +40,12 @@ export class ListComponent implements OnInit, OnChanges {
                 if (!changes[propName].firstChange){
                     switch(propName){
                         case 'tags': {
-                            this.getRecipeFromTags()
+                            this.getRecipeFromTags();
                         return;
                         }
                         case 'update': {
                         if (this.update){
-                            this.getRecipeFromTags()
+                            this.getRecipeFromTags();
                             }
                         return;
                         }
@@ -52,7 +53,7 @@ export class ListComponent implements OnInit, OnChanges {
                 } else {
                     if(propName==='tags'){
                         if(this.tags == undefined) {
-                            this.tags = []
+                            this.tags = [];
                         }
                     }
                 }
@@ -61,7 +62,14 @@ export class ListComponent implements OnInit, OnChanges {
     }
 
     sortByOption(): void {
-        this.recipes.sort((a,b) => a[this.sortBy].localeCompare(b[this.sortBy]));
+        this.recipes.sort((a,b) => {
+                    if (this.sortBy=="tagName"){
+                        let aTagNumber = a.tags.filter(val => this.tags.includes(val.tagName.toLowerCase())).length;
+                        let bTagNumber = b.tags.filter(val => this.tags.includes(val.tagName.toLowerCase())).length;
+                        return bTagNumber-aTagNumber;
+                        }
+                   return a[this.sortBy].localeCompare(b[this.sortBy]);
+            });
     }
 
     onRowSelect(event: any){
@@ -70,7 +78,10 @@ export class ListComponent implements OnInit, OnChanges {
 
     getRecipeFromTags(): void {
         this.recipesService.getRecipeByTags(this.tags).subscribe(successResponse => {
-                this.recipes=successResponse.sort((a,b) => a.title.localeCompare(b.title));
+                this.recipes=successResponse;
+                this.sortByOption();
+                this.selectedRecipe =this.recipes[0];
+                this.recipe.emit(this.selectedRecipe);
             }, errorResponse => {
                 console.log("Error")
             });

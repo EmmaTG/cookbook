@@ -49,7 +49,7 @@ export class NewRecipeComponent implements OnInit{
         console.log("Form submitted");
         for (var tag of this.stringTags){
             let newTag: Tag = { tagId: null, tagName: ""}
-            newTag.tagName = tag;
+            newTag.tagName = tag.toLowerCase();
             this.recipe.tags.push(newTag);
             }
         console.log(this.recipe);

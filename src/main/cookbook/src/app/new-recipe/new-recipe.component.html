@@ -68,7 +68,7 @@
     <div class="p-grid p-formgrid">
         <div class="p-col-10"></div>
         <p-button type="submit" icon="pi pi-check" label="Save" class="p-col-1"
-        [disabled]="!newRecipe.form.valid"></p-button>
+        [disabled]="!newRecipe.form.valid || stringTags.length<1"></p-button>
         <div class="p-col"></div>
     </div>
 </form>

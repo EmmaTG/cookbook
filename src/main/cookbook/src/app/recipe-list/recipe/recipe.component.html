@@ -1,5 +1,6 @@
-<div *ngIf="recipe">
-    <p-fieldset [legend]="recipe.title" [style]="{'width':'75%'}">
+
+    <div *ngIf="recipe">
+    <p-fieldset [legend]="recipe.title" [style]="{'width':'100%'}">
         <div *ngIf="!edit">
 
             <div class="p-grid p-jc-start">
@@ -9,61 +10,69 @@
                 <div class="p-col-1">
                     <button pButton icon="pi pi-pencil" (click)="editRecipe()" label="Edit"></button>
                 </div>
+                <div class="p-col-1"></div>
             </div>
+            <div class="p-grid">
+                <div class="p-col-8">
+                    <div class="p-grid p-jc-start">
+                        <div class="p-col-3">
+                            <h4>Ingredients:  </h4>
+                        </div>
 
-            <div class="p-grid p-jc-start">
-                <div class="p-col-2">
-                    <h4>Ingredients: </h4>
+                        <div class="p-d-flex p-ai-center">
+                            <div *ngFor="let tag of recipe.tags">
+                                    <p-chip styleClass="p-mr-2 custom-chip">  {{ tag.tagName | capitalFirstLetter }} </p-chip>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-grid p-jc-start">
+                        <div class="p-col-3">
+                            <h4>Cooking time: </h4>
+                        </div>
+
+                        <div class="p-col">
+                            <p>{{recipe.cookTime}}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-grid p-jc-start">
+                        <div class="p-col-3">
+                            <h4>Last made on: </h4>
+                        </div>
+
+                        <div class="p-col">
+                            <p>{{recipe.dateLastMade ? dateFormat(recipe.dateLastMade) : 'Never'}}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-grid p-jc-start">
+                        <div class="p-col-3">
+                            <h4>Notes: </h4>
+                        </div>
+
+                        <div class="p-col">
+                            <p>{{recipe.notes}}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-grid">
+                        <div class="p-col-6">
+                            <h4>Do you want to make this today?</h4>
+                        </div>
+
+                        <div class="p-col">
+                            <p-confirmPopup></p-confirmPopup>
+                            <button pButton icon="pi pi-check" (click)="confirm($event,recipe)" [class]="buttonStyle" [disabled]="made"></button>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="p-d-flex p-ai-center">
-                    <div *ngFor="let tag of recipe.tags">
-                            <p-chip styleClass="p-mr-2 custom-chip"> {{ tag.tagName }} </p-chip>
+                <div class="p-col-4">
+                    <div class="div-wrapper">
+                        <img src="../../../assets/images/cookbookGraphic.gif" width="300" height="302">
                     </div>
                 </div>
             </div>
-
-            <div class="p-grid p-jc-start">
-                <div class="p-col-2">
-                    <h4>Cooking time: </h4>
-                </div>
-
-                <div class="p-col">
-                    <p>{{recipe.cookTime}}</p>
-                </div>
-            </div>
-
-            <div class="p-grid p-jc-start">
-                <div class="p-col-2">
-                    <h4>Last made on: </h4>
-                </div>
-
-                <div class="p-col">
-                    <p>{{recipe.dateLastMade || 'Never'}}</p>
-                </div>
-            </div>
-
-            <div class="p-grid p-jc-start">
-                <div class="p-col-2">
-                    <h4>Notes: </h4>
-                </div>
-
-                <div class="p-col">
-                    <p>{{recipe.notes}}</p>
-                </div>
-            </div>
-
-            <div class="p-grid">
-                <div class="p-col-3">
-                    <h4>Do you want to make this today?</h4>
-                </div>
-
-                <div class="p-col-4">
-                    <p-confirmPopup></p-confirmPopup>
-                    <button pButton icon="pi pi-check" (click)="confirm($event,recipe)" [class]="buttonStyle" [disabled]="made"></button>
-                </div>
-            </div>
-
         </div>
 
         <div *ngIf="edit">
@@ -94,9 +103,10 @@
                         <h4>Ingredients: </h4>
                     </div>
                     <div class="p-col">
-                            <p-chips styleClass="p-mr-2 custom-chip" separator="," [(ngModel)]="editingRecipe.tags"
-                                     name="tags" field="tagName"> </p-chips>
-                        <div *ngIf="editingRecipe.tags.length<1" style="color: red" class="error">
+                            <p-chips styleClass="p-mr-2 custom-chip" separator="," [(ngModel)]="tagStrings"
+                                     name="tagStrings" #tags="ngModel">
+                            </p-chips>
+                        <div *ngIf="tagStrings.length<1" style="color: red" class="error">
                             At least one ingredient is Required
                         </div>
                     </div>
@@ -127,7 +137,7 @@
 
                 <div class="p-grid p-formgrid">
                     <div class="p-field">
-                        <div class="p-col-2">
+                        <div class="p-col-3">
                             <h4>Notes: </h4>
                         </div>
                         <div class="p-col">

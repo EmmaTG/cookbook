@@ -2,3 +2,15 @@
   background: var(--primary-color);
   color: var(--primary-color-text);
 }
+
+.div-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.div-wrapper img {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+}

@@ -22,9 +22,12 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeListComponent } from './recipe-list.component';
 import { NewRecipeModule } from '../new-recipe/new-recipe.module';
 
+import { CapitalFirstLetterPipe } from '../@common/capital-first-letter.pipe';
+
+
 
 @NgModule({
-    declarations: [ListComponent, RecipeComponent, RecipeListComponent],
+    declarations: [ListComponent, RecipeComponent, RecipeListComponent, CapitalFirstLetterPipe],
     imports: [
             CommonModule,
             RecipeListRoutingModule,

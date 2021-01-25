@@ -19,8 +19,8 @@ export class RecipeListComponent implements OnInit {
     tags: string[] = [];
     recipes: Recipe[];
     selectedRecipe: Recipe;
-    display: boolean = false;
 
+    display: boolean = false;
     update: boolean = false;
 
     constructor(private route: ActivatedRoute,
@@ -38,6 +38,9 @@ export class RecipeListComponent implements OnInit {
                 this.tags.push(successResponse.tags);
             } else {
                 this.tags = successResponse.tags;
+            }
+            if (this.tags){
+                this.tags = this.tags.map(tag => tag.toLowerCase());
             }
         }, errorResponse => {
             console.log("error");

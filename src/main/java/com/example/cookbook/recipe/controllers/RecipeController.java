@@ -49,6 +49,12 @@ public class RecipeController {
     @PostMapping("/recipes")
     public Recipe saveRecipe(@RequestBody @Valid Recipe newRecipe){
         List<Tag> tags = newRecipe.getTags();
+        tags= tags.stream()
+                .map(val -> {
+                    val.setTagName(val.getTagName().toLowerCase());
+                    return val;
+                })
+                .collect(Collectors.toList());
         List<Tag> newTags = new ArrayList<>();
         for (Tag tag: tags){
             Tag foundTag = recipeService.getTagByName(tag.getTagName())

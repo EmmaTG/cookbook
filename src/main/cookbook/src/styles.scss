@@ -1,7 +1,34 @@
 .center-content {
-    display: fled;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     }
 
+.right-align-content {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    text-align: right;
+    }
+
+.left-align-content {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    }
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+.container{
+    background-image: url(./assets/images/backgroundImage.png);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

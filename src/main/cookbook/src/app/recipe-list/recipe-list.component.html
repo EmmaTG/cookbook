@@ -12,11 +12,16 @@
     </div>
 </div>
 
-<div class="p-grid">
-    <div class="p-col-6 p-offset-4">
-        <label class="" style="width:100px">Ingredients: </label>
-        <p-chips id="tags" [(ngModel)]="tags" class="p-col" placeholder="Enter your ingredients separated by a comma" separator="," (onAdd)="onAdd()" (onRemove)="onRemove()"></p-chips>
+<div class="p-grid p-fluid">
+    <div class="p-col-4"></div>
+    <div class="p-col-1" class="center-content">
+        <label [style]="{'width':'100%'}">Ingredients: </label>
     </div>
+    <div class="p-col-4">
+        <p-chips id="tags" [(ngModel)]="tags" placeholder="Enter your ingredients separated by a comma"
+                 separator="," (onAdd)="onAdd()" (onRemove)="onRemove()" [style]="{'width':'100%'}"></p-chips>
+    </div>
+    <div class="p-col-3"></div>
 </div>
 
 <div class="p-grid">
@@ -24,7 +29,9 @@
 
             <app-list [tags]="tags" [update]="update" (recipe)="selected($event)" ></app-list>
     </div>
-    <div class="p-col-10">
+    <div class="p-col-1"></div>
+    <div class="p-col-7">
         <app-recipe [recipe]="selectedRecipe" (recipeUpdated)="onUpdateList($event)"></app-recipe>
     </div>
+    <div class="p-col-2"></div>
 </div>
