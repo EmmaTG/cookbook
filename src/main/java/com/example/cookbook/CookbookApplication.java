@@ -35,7 +35,7 @@ public class CookbookApplication implements CommandLineRunner {
 //		tags.add("Pasta");
 //		Set<Recipe> listOfRecipes = recipeService.getRecipesByTags(tags);
 //		listOfRecipes.forEach(x -> System.out.println(x.getTitle()));
-			recipeService.deleteRecipe(29L);
+//			recipeService.deleteRecipe(29L);
 //		Recipe recipe = new Recipe("Test", "TestLoc", "TestCook", "", Arrays.asList("test1","test2"));
 //
 //		recipeService.saveRecipe(recipe);

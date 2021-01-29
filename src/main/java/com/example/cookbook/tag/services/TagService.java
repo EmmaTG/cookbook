@@ -33,8 +33,8 @@ public class TagService {
     public Tag updateTag(Long tagId, Tag changedTag){
         Tag tagToUpdate = getTagById(tagId)
                 .orElseThrow();
-        tagToUpdate.setTagName(changedTag.getTagName());
-        tagToUpdate.setRecipes(changedTag.getRecipes());
+//        tagToUpdate.setTagName(changedTag.getTagName());
+//        tagToUpdate.setRecipes(changedTag.getRecipes());
         return tagRepo.save(tagToUpdate);
     }
 }

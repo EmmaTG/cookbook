@@ -59,7 +59,7 @@ public class RecipeController {
         for (Tag tag: tags){
             Tag foundTag = recipeService.getTagByName(tag.getTagName())
                     .orElse(tag);
-            foundTag.getRecipes().add(newRecipe);
+//            foundTag.getRecipes().add(newRecipe);
             newTags.add(foundTag);
         }
         newRecipe.setTags(newTags);
@@ -81,9 +81,9 @@ public class RecipeController {
         for (Tag tag: tags){
             Tag foundTag = recipeService.getTagByName(tag.getTagName())
                     .orElse(tag);
-            if (!foundTag.getRecipes().contains(newRecipe)) {
-                foundTag.getRecipes().add(newRecipe);
-            }
+//            if (!foundTag.getRecipes().contains(newRecipe)) {
+//                foundTag.getRecipes().add(newRecipe);
+//            }
             newTags.add(foundTag);
         }
         newRecipe.setTags(newTags);
@@ -100,7 +100,7 @@ public class RecipeController {
     @DeleteMapping("/recipes/{id}")
     public void deleteRecipe(@PathVariable(value = "id") Long id){
         Recipe recipe = recipeService.getRecipeByID(id).orElseThrow();
-        recipe.getTags().forEach(tag -> tag.getRecipes().remove(recipe));
+//        recipe.getTags().forEach(tag -> tag.getRecipes().remove(recipe));
         recipeService.deleteRecipe(id);
     }
 

@@ -28,13 +28,13 @@ public class Tag {
     @Column(name = "tagName")
     private String tagName;
 
-    @ManyToMany(mappedBy = "tags", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
-    @Column(name = "recipes")
-    @JsonIgnore
-    private List<Recipe> recipes = new ArrayList<>();
+//    @ManyToMany(mappedBy = "tags", cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
+//    @Column(name = "recipes")
+//    @JsonIgnore
+//    private List<Recipe> recipes;
 
-    public void addRecipe(Recipe recipe){
-        recipes.add(recipe);
-        recipe.getTags().add(this);
-    }
+//    public void addRecipe(Recipe recipe){
+//        recipes.add(recipe);
+//        recipe.getTags().add(this);
+//    }
 }
