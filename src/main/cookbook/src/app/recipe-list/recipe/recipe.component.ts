@@ -33,8 +33,13 @@ export class RecipeComponent implements OnInit, OnChanges {
             if (changes.hasOwnProperty(propName)){
                 switch(propName){
                     case 'recipe': {
-                        this.made = false;
-                        this.changeButtonStyle();
+                        if(!changes[propName].firstChange){
+                            let newDate: Date = new Date();
+                            let currentDate: string = this.dateFormat(newDate.toDateString());
+                            let madeDate: string = this.recipe.dateLastMade? this.dateFormat(this.recipe.dateLastMade) : "";
+                            this.made = currentDate===madeDate? true: false;
+                            this.changeButtonStyle();
+                        }
                     return;
                     }
                 }
@@ -49,10 +54,10 @@ export class RecipeComponent implements OnInit, OnChanges {
             icon: 'pi pi-question-circle',
             accept: ()=> {
                 this.recipesService.updateLastMadeDate(recipe.id).subscribe(successResponse => {
-                        this.recipe = successResponse;
                         this.made = true;
                         this.changeButtonStyle();
-                        this.recipeUpdated.emit(true);
+                        this.recipe = successResponse;
+//                         this.recipeUpdated.emit(true);
                     }, errorResponse => {
                         console.log('Error!!');
                     });
@@ -122,6 +127,13 @@ export class RecipeComponent implements OnInit, OnChanges {
     }
 
     changeButtonStyle(){
+//     let currentDate: string = this.dateFormat(new Date());
+//     let madeDate: string = this.dateFormat(this.recipe.dateLastMade);
+//     console.log("Today's date")
+//     console.log(currentDate)
+//     console.log("Made date")
+//     console.log(madeDate)
+//     console.log(currentDate===madeDate);
         if (this.made){
             this.buttonStyle = ""
         } else {
@@ -131,13 +143,13 @@ export class RecipeComponent implements OnInit, OnChanges {
 
 
     dateFormat(date: string): string{
-    var year = date.substring(0,4);
-    var month = date.substring(5,7);
-    var day = date.substring(8,10);
+        var year = date.substring(0,4);
+        var month = date.substring(5,7);
+        var day = date.substring(8,10);
 
-    let recipeDate= day + "-" + month + "-" + year
+        let recipeDate= day + "-" + month + "-" + year
 
-    let dateFormatted = new Date(date);
+        let dateFormatted = new Date(date);
         return dateFormatted.toDateString();
     }
 
