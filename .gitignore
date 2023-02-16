@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+
+/src/main/cookbook/node_modules
+/src/main/cookbook/.angular
+
 ### STS ###
 .apt_generated
 .classpath
