@@ -18,6 +18,7 @@ export class RecipeComponent implements OnInit, OnChanges {
 
     made: boolean = false;
     edit: boolean =false;
+    location_web: boolean = false;
     buttonStyle: string = "p-button-outlined";
     editingRecipe: Recipe;
     tagStrings: string[];
@@ -34,11 +35,14 @@ export class RecipeComponent implements OnInit, OnChanges {
                 switch(propName){
                     case 'recipe': {
                         if(!changes[propName].firstChange){
-                            let newDate: Date = new Date();
-                            let currentDate: string = this.dateFormat(newDate.toDateString());
-                            let madeDate: string = this.recipe.dateLastMade? this.dateFormat(this.recipe.dateLastMade) : "";
-                            this.made = currentDate===madeDate? true: false;
-                            this.changeButtonStyle();
+                            if(changes[propName].currentValue != null){
+                                let newDate: Date = new Date();
+                                let currentDate: string = this.dateFormat(newDate.toDateString());
+                                let madeDate: string = this.recipe.dateLastMade? this.dateFormat(this.recipe.dateLastMade) : "";
+                                this.made = currentDate===madeDate? true: false;
+                                this.location_web = this.recipe.location.includes("www.");
+                                this.changeButtonStyle();
+                            }
                         }
                     return;
                     }

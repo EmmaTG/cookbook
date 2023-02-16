@@ -41,6 +41,21 @@
 
                     <div class="p-grid p-jc-start">
                         <div class="p-col-3">
+                            <h4>Recipe at </h4>
+                        </div>
+
+                        <div class="p-col">
+                            <div *ngIf="!location_web" >
+                                <p>{{recipe.location}}</p>
+                            </div>
+                            <div *ngIf="location_web" >
+                                <a href="{{recipe.location}}">{{recipe.location}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-grid p-jc-start">
+                        <div class="p-col-3">
                             <h4>Last made on: </h4>
                         </div>
 

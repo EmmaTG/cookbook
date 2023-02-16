@@ -20,4 +20,8 @@ export class HomePageComponent implements OnInit {
         this.display=event;
     }
 
+    onListAll(event: any): void {
+
+    }
+
 }

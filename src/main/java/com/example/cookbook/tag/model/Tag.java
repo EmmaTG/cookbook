@@ -22,10 +22,10 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tagId")
+    @Column(name = "tag_id")
     private Long id;
 
-    @Column(name = "tagName")
+    @Column(name = "tag_name")
     private String tagName;
 
 //    @ManyToMany(mappedBy = "tags", cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)

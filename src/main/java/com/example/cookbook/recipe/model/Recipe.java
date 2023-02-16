@@ -22,7 +22,7 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="recipeId")
+    @Column(name="recipe_id")
     private Long id;
 
     @Column(name="title")
@@ -45,8 +45,8 @@ public class Recipe {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name="recipe_tag",
-            joinColumns = @JoinColumn(name="recipe_id", referencedColumnName = "recipeId"),
-            inverseJoinColumns = @JoinColumn(name="tag_id", referencedColumnName = "tagId"))
+            joinColumns = @JoinColumn(name="recipe_id", referencedColumnName = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name="tag_id", referencedColumnName = "tag_id"))
     @Column(name="tags")
     private List<Tag> tags = new ArrayList<>();
 

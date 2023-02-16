@@ -75,13 +75,16 @@ export class ListComponent implements OnInit, OnChanges {
     onRowSelect(event: any){
         this.recipe.emit(event.data);
     }
+    onRowUnselect(event:any){
+        this.recipe.emit(null);
+    }
 
     getRecipeFromTags(): void {
         this.recipesService.getRecipeByTags(this.tags).subscribe(successResponse => {
                 this.recipes=successResponse;
                 this.sortByOption();
-                this.selectedRecipe =this.recipes[0];
-                this.recipe.emit(this.selectedRecipe);
+//                 this.selectedRecipe =this.recipes[0];
+//                 this.recipe.emit(this.selectedRecipe);
             }, errorResponse => {
                 console.log("Error")
             });
