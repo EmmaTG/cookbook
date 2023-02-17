@@ -11,12 +11,15 @@
     </div>
 </div>
 
-<p-dropdown [options]="sortByOptions" [(ngModel)]="sortBy" optionLabel="label" optionValue="value"
-            value="Relevance" (onChange)="sortByOption()" class="p-fluid"></p-dropdown>
+<div class="p-grid">
+    <p-dropdown [options]="sortByOptions" [(ngModel)]="sortBy" optionLabel="label" optionValue="value"
+                value="Relevance" (onChange)="sortByOption()" class="p-col-2"></p-dropdown>
+</div>
+
 <h3 *ngIf="recipes.length<1" class="center-content">
     Sorry, there are no recipes with {{tags.length>1 ? 'these': 'this'}} ingredient{{tags.length>1 ? 's': ''}} :(</h3>
 <p-table [value]="recipes" selectionMode="single" [(selection)]="selectedRecipe"
-         [scrollable]="true" scrollHeight="flex" (onRowSelect)="onRowSelect($event)">
+         [scrollable]="true" scrollHeight="flex" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
     <ng-template p-template="header">
         <tr>
             <th>  Recipe</th>
