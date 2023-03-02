@@ -33,6 +33,10 @@ public class RecipeService {
     }
 
     public Recipe saveRecipe(Recipe newRecipe){
+        for (Tag t : newRecipe.getTags()){
+            String title = t.getTagName();
+            t.setTagName(title.trim().toLowerCase());
+        }
         return recipeRepo.save(newRecipe);
     }
 
@@ -43,6 +47,11 @@ public class RecipeService {
         recipeToUpdate.setLocation(newRecipe.getLocation());
         recipeToUpdate.setCookTime(newRecipe.getCookTime());
         recipeToUpdate.setDateLastMade(newRecipe.getDateLastMade());
+
+        for (Tag t : newRecipe.getTags()){
+            String title = t.getTagName();
+            t.setTagName(title.trim().toLowerCase());
+        }
         recipeToUpdate.setTags(newRecipe.getTags());
         return recipeRepo.save(recipeToUpdate);
     }

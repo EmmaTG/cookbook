@@ -12,6 +12,9 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputMaskModule} from 'primeng/inputmask';
 import {ChipsModule} from 'primeng/chips';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {MultiSelectModule} from 'primeng/multiselect';
+
 
 
 @NgModule({
@@ -27,6 +30,8 @@ import {ChipsModule} from 'primeng/chips';
     InputMaskModule,
     ChipsModule,
     NewRecipeModule,
+    InputSwitchModule,
+    MultiSelectModule
   ]
 })
 export class HomePageModule { }

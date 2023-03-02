@@ -19,7 +19,7 @@ public class TagController {
     TagService tagService;
 
     //Get all tags
-    @GetMapping("tags")
+    @GetMapping("/tags")
     public List<Tag> getAllTags(){
         return tagService.getTags();
     }

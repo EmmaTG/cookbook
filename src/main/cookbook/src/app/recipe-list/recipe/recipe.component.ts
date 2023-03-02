@@ -89,7 +89,6 @@ export class RecipeComponent implements OnInit, OnChanges {
                 console.log(this.editingRecipe)
                 this.recipesService.updateRecipe(this.editingRecipe).subscribe(successResponse => {
                         this.recipe = successResponse;
-                        console.log(this.recipe);
                         this.recipeUpdated.emit(true);
                         this.editingRecipe= null;
                         this.tagStrings=[];
