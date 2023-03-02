@@ -6,6 +6,8 @@ target/
 
 
 /src/main/cookbook/node_modules
+/src/main/cookbook/.angular
+/src/main/cookbook/e2e
 
 ### STS ###
 .apt_generated
@@ -35,3 +37,4 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/cookbook/.angular/
+/src/main/cookbook/e2e/
