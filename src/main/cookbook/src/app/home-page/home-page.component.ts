@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewRecipeComponent } from '../new-recipe/new-recipe.component';
 import { TagsService } from '../@api/services/tags.service';
-
-interface selectTag {
-    name: string,
-    code: string
-}
+import {selectTag} from '../@api/models/selectTag';
 
 @Component({
   selector: 'app-home-page',
@@ -18,7 +14,7 @@ export class HomePageComponent implements OnInit {
     display: boolean = false;
     listTags = false;
     tags: string[] = [];
-    availableTags : selectTag[];
+    availableTags : selectTag[] = [];
     selectedTags : selectTag[];
 
     constructor(private tagsService: TagsService) {
@@ -30,6 +26,7 @@ export class HomePageComponent implements OnInit {
 
     onSaved(event: any): void {
         this.display=event;
+        this.getPopularTags();
     }
 
     createTags(event:any):void {
@@ -42,7 +39,7 @@ export class HomePageComponent implements OnInit {
 
     getPopularTags(){
         this.tagsService.getAllTags().subscribe(successResponse => {
-            this.availableTags = successResponse.map(x => {return {name:x.tagName, code:x.tagName}});
+            this.availableTags = successResponse.map(x => {return {name:x.tagName, code:x.tagId}});
         }, errorResponse => {
             console.log("Error")
         });

@@ -33,9 +33,14 @@ public class RecipeService {
     }
 
     public Recipe saveRecipe(Recipe newRecipe){
-        for (Tag t : newRecipe.getTags()){
+        List<Tag> tags = newRecipe.getTags();
+        for (Tag t : tags){
             String title = t.getTagName();
             t.setTagName(title.trim().toLowerCase());
+            if (t.getId()==null) {
+                Optional<Tag> tag_optional = tagRepo.findByName(title);
+                tag_optional.ifPresent(tag -> t.setId(tag.getId()));
+            }
         }
         return recipeRepo.save(newRecipe);
     }
@@ -51,6 +56,10 @@ public class RecipeService {
         for (Tag t : newRecipe.getTags()){
             String title = t.getTagName();
             t.setTagName(title.trim().toLowerCase());
+            if (t.getId()==null) {
+                Optional<Tag> tag_optional = tagRepo.findByName(title);
+                tag_optional.ifPresent(tag -> t.setId(tag.getId()));
+            }
         }
         recipeToUpdate.setTags(newRecipe.getTags());
         return recipeRepo.save(recipeToUpdate);

@@ -39,18 +39,26 @@
     <div class="p-field">
         <div class="p-grid p-formgrid">
             <label class="p-col-2">*Ingredients: </label>
-                <p-chips [(ngModel)]="stringTags" name="tags" placeholder="Enter your ingredients separated by a comma"
-                         class="p-col-10 p-fluid" separator="," #tags="ngModel"></p-chips>
-            <div *ngIf="stringTags.length<1 && (tags.dirty || tags.touched)" style="color: red" class="error">
-                At least one ingredient is Required
-            </div>
-            <div class="p-col"></div>
-        </div>
-        <div class="p-grid">
-            <span class="p-col-2"></span>
+                <p-multiSelect [options]="availableTags" placeholder="Select your ingredients" [(ngModel)]="selectedTags"
+                           optionLabel="name" display="chip" (onChange)="tagSelected($event)"
+                            editable="true" ></p-multiSelect>
+            <span class="p-col-1"></span>
             <span class="ui-danger p-col-10">
                 <small>Enter the main ingredients of this recipe </small>
             </span>
+            <div class="p-col"></div>
+            <div>
+                <label for="ingredientNotListed">Ingredient not listed: </label>
+                <p-checkbox name="ingredientNotListed" [binary]="true" [(ngModel)]="newIngredient"></p-checkbox>
+                <div *ngIf="newIngredient">
+                    <p-chips [(ngModel)]="stringTags" name="tags" placeholder="Enter ingredients separated by a comma"
+                             class="p-col-10 -fluid" separator="," #tags="ngModel"></p-chips>
+
+                </div>
+            </div>
+<!--            <div *ngIf="((selectedTags.length<1) && (stringTags.length<1)) && (multiselect.touched)" style="color: red" class="error">-->
+<!--                At least one ingredient is Required-->
+<!--            </div>-->
             <div class="p-col"></div>
         </div>
     </div>
