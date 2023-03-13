@@ -1,12 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormControl} from '@angular/forms';
 import { RecipesService } from '../@api/services/recipes.service';
-import {selectTag} from '../@api/models/selectTag';
 
 import {Message} from 'primeng/api';
 
 import { Recipe } from '../@api/models/recipe'
 import { Tag } from '../@api/models/tag'
+import {SelectTag} from '../@api/models/selectTag';
 
 
 @Component({
@@ -18,13 +18,15 @@ import { Tag } from '../@api/models/tag'
 export class NewRecipeComponent implements OnInit{
 
     @Output() saved: EventEmitter<boolean> = new EventEmitter();
-    @Input() availableTags: selectTag[];
+    @Input() fullTags: Tag[];
 
     display: boolean = false;
     newIngredient: boolean = false;
 
-    stringTags: string[];
-    selectedTags : selectTag[];
+    stringTags: string[] = [];
+    filteredTags : String[] = [];
+    selectedTags: Tag[] = [];
+    newIngredientMessage: string = "Ingredient not in List"
 
     recipe: Recipe;
 
@@ -39,7 +41,7 @@ export class NewRecipeComponent implements OnInit{
         this.recipe = {
                       id: null,
                       title:'',
-                      cookTime: '',
+                      cookTime: '00 hr 00 min',
                       dateCreated: null,
                       dateLastMade: null,
                       location: '',
@@ -47,19 +49,17 @@ export class NewRecipeComponent implements OnInit{
                       notes: '',
                   };
         this.stringTags = []
-        this.selectedTags = [];
     }
 
     onSubmit() {
         console.log("Form submitted");
         for (var tag of this.stringTags){
-            let newTag: Tag = { tagId: null, tagName: ""}
+            let newTag: Tag = { id: null, tagName: ""}
             newTag.tagName = tag.trim().toLowerCase();
             this.recipe.tags.push(newTag);
             }
         for (var sTag of this.selectedTags){
-            let newTag: Tag = {tagId: sTag.code, tagName: sTag.name.toLowerCase()}
-            this.recipe.tags.push(newTag);
+            this.recipe.tags.push(sTag);
         }
         this.recipesService.saveRecipe(this.recipe).subscribe(successResponse => {
             this.saved.emit(false)
@@ -69,7 +69,26 @@ export class NewRecipeComponent implements OnInit{
         });
     }
 
-    tagSelected(event:any){
+    tagSelected(event: any) {
+        if (event.tagName === this.newIngredientMessage){
+            this.newIngredient = true;
+        }
+        this.selectedTags = this.selectedTags.filter(x => { return(x.tagName !== this.newIngredientMessage)});
+    }
+
+    search(event) {
+        let filtered : any[] = [];
+        let query = event.query;
+
+        for(let i = 0; i < this.fullTags.length; i++) {
+            let tag = this.fullTags[i];
+            if (tag.tagName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(tag);
+                console.log(tag);
+            }
+        }
+        filtered.push({id:0, tagName: this.newIngredientMessage})
+        this.filteredTags = filtered;
     }
 
   updateName() {

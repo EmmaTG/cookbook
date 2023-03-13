@@ -7,7 +7,7 @@
     <div class="p-col-2 p-offset-6">
         <button pButton type="text" class="p-button-secondary" (click)="display = true" icon="pi pi-plus" label="New Recipe"></button>
         <p-dialog header="New Recipe" [(visible)]="display" position="right" [style]="{width: '50vw'}">
-            <app-new-recipe (saved)="onSaved($event)"></app-new-recipe>
+            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>
         </p-dialog>
     </div>
 </div>
@@ -25,6 +25,8 @@
 
 <div class="p-grid">
     <div class="p-col-2">
-            <app-list [tags]="tags" (recipe)="selected($event)" ></app-list>
+            <app-list [tags]="tags" (recipe)="selected($event)" (tagsUpdated)="updateQueryParameters($event)"
+            [updateList]="updateList"
+            ></app-list>
     </div>
 </div>

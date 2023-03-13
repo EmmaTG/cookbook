@@ -1,4 +1,4 @@
-export interface selectTag {
-   name: string,
-   code: number
+export interface SelectTag {
+   label: string,
+   value: number
 }

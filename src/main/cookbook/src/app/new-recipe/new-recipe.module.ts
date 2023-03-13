@@ -13,6 +13,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {ChipsModule} from 'primeng/chips';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {CheckboxModule} from 'primeng/checkbox';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     ButtonModule,
     ChipsModule,
     MultiSelectModule,
+    AutoCompleteModule,
     CheckboxModule
   ],
   exports: [NewRecipeComponent]

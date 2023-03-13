@@ -11,10 +11,11 @@ import {Observable} from 'rxjs';
 })
 export class ListComponent implements OnInit, OnChanges {
 
-    @Input() tags: string[];
-//     @Input() update: boolean;
+     @Input() tags: string[];
+     @Input() updateList: boolean;
 
-    @Output() recipe: EventEmitter<Recipe> = new EventEmitter();
+     @Output() recipe: EventEmitter<Recipe> = new EventEmitter();
+     @Output() tagsUpdated: EventEmitter<boolean> = new EventEmitter();
 
     selectedRecipe: Recipe;
     recipes: Recipe[]=[];
@@ -40,16 +41,19 @@ export class ListComponent implements OnInit, OnChanges {
                 if (!changes[propName].firstChange){
                     switch(propName){
                         case 'tags': {
-                            this.getRecipeFromTags();
+                            let prevValue = JSON.stringify(changes.tags.previousValue.sort());
+                            let currValue = JSON.stringify(changes.tags.currentValue.sort());
+                            if (currValue !== prevValue){
+                                this.getRecipeFromTags();
+                            }
                         return;
                         }
-//                         case 'update': {
-//                         if (this.update){
-//                             console.log("this.update");
-//                             this.getRecipeFromTags();
-//                             }
-//                         return;
-//                         }
+                        case 'updateList': {
+                            if (this.updateList){
+                                this.getRecipeFromTags();
+                            }
+                        return;
+                        }
                     }
                 } else {
                     if(propName==='tags'){
@@ -87,19 +91,11 @@ export class ListComponent implements OnInit, OnChanges {
             });
     }
 
-    onRowSelect(event: any){
-        this.recipe.emit(event.data);
-    }
-    onRowUnselect(event:any){
-        this.recipe.emit(null);
-    }
-
     getRecipeFromTags(): void {
         this.recipesService.getRecipeByTags(this.tags).subscribe(successResponse => {
                 this.recipes=successResponse;
                 this.sortByOption();
-//                 this.selectedRecipe =this.recipes[0];
-//                 this.recipe.emit(this.selectedRecipe);
+                this.tagsUpdated.emit(true);
             }, errorResponse => {
                 console.log("Error")
             });

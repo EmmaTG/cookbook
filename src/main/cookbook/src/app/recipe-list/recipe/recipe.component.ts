@@ -83,7 +83,7 @@ export class RecipeComponent implements OnInit, OnChanges {
             accept: ()=> {
                 this.editingRecipe.tags = []
                 for (var tag of this.tagStrings){
-                    let newTag: Tag = { tagId: null, tagName: ""}
+                    let newTag: Tag = { id: null, tagName: ""}
                     newTag.tagName = tag.toLowerCase();
                     this.editingRecipe.tags.push(newTag);
                 }

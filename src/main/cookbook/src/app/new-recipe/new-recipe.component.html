@@ -7,7 +7,7 @@
                 <input type="text" id="titleID" pInputText [(ngModel)]="recipe.title" name="title"
                        #title="ngModel" [style]="{'width':'100%'}" required/>
                 <div *ngIf="title.errors && (title.dirty || title.touched)" style="color: red" class="error">
-                    An approximate cook time is Required
+                    Your recipe must have a name
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="p-grid p-formgrid">
           <label class="p-col-2">*Cooking Time: </label>
             <div class="p-col">
-                <p-inputMask mask="99 hr 99 min" placeholder="   hr    min" id="cookTimeID" pInputText
+                <p-inputMask mask="99 hr 99 min" placeholder="00hr 00min" id="cookTimeID" pInputText
                              [(ngModel)]="recipe.cookTime" name="time" #cookTime="ngModel"
                              [style]="{'width':'100%'}" required></p-inputMask>
                 <div *ngIf="cookTime.errors && (cookTime.dirty || cookTime.touched)" style="color: red" class="error">
@@ -39,20 +39,17 @@
     <div class="p-field">
         <div class="p-grid p-formgrid">
             <label class="p-col-2">*Ingredients: </label>
-                <p-multiSelect [options]="availableTags" placeholder="Select your ingredients" [(ngModel)]="selectedTags"
-                           optionLabel="name" display="chip" (onChange)="tagSelected($event)"
-                            editable="true" ></p-multiSelect>
+                <p-autoComplete [(ngModel)]="selectedTags" [suggestions]="filteredTags" (completeMethod)="search($event)" field="tagName" [multiple]="true"
+                (onSelect)="tagSelected($event)"></p-autoComplete>
             <span class="p-col-1"></span>
             <span class="ui-danger p-col-10">
                 <small>Enter the main ingredients of this recipe </small>
             </span>
             <div class="p-col"></div>
-            <div>
-                <label for="ingredientNotListed">Ingredient not listed: </label>
-                <p-checkbox name="ingredientNotListed" [binary]="true" [(ngModel)]="newIngredient"></p-checkbox>
+            <div class="p-col-10-fluid">
                 <div *ngIf="newIngredient">
                     <p-chips [(ngModel)]="stringTags" name="tags" placeholder="Enter ingredients separated by a comma"
-                             class="p-col-10 -fluid" separator="," #tags="ngModel"></p-chips>
+                             class="p-col-10-fluid" separator="," #tags="ngModel"></p-chips>
 
                 </div>
             </div>
@@ -76,7 +73,7 @@
     <div class="p-grid p-formgrid">
         <div class="p-col-10"></div>
         <p-button type="submit" icon="pi pi-check" label="Save" class="p-col-1"
-        [disabled]="!newRecipe.form.valid || stringTags.length<1"></p-button>
+        [disabled]="!newRecipe.form.valid || (stringTags.length<1 && selectedTags.length<1) "></p-button>
         <div class="p-col"></div>
     </div>
 </form>

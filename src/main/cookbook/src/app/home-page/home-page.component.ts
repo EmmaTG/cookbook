@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewRecipeComponent } from '../new-recipe/new-recipe.component';
 import { TagsService } from '../@api/services/tags.service';
 import {Tag} from '../@api/models/tag';
+import {SelectTag} from '../@api/models/selectTag';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +17,7 @@ export class HomePageComponent implements OnInit {
     availableTags : String[] = [];
     filteredTags : String[] = [];
     selectedTags : String[] = [];
+    fullTags: Tag[] = [];
 
     constructor(private tagsService: TagsService) {
         this.getPopularTags();
@@ -45,7 +47,9 @@ export class HomePageComponent implements OnInit {
 
     getPopularTags(){
         this.tagsService.getAllTags().subscribe(successResponse => {
-            this.availableTags = successResponse.map(x => {return x.tagName});
+            this.availableTags = successResponse.map(x => {
+            this.fullTags.push(x);
+            return x.tagName});
         }, errorResponse => {
             console.log("Error")
         });

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 
 import { Recipe } from '../@api/models/recipe';
+import { Tag } from '../@api/models/Tag';
 import { RecipesService } from '../@api/services/recipes.service';
 import { TagsService } from '../@api/services/tags.service';
 
@@ -20,9 +21,10 @@ export class RecipeListComponent implements OnInit {
     filteredTags : String[] = [];
     recipes: Recipe[];
     selectedRecipe: Recipe;
+    fullTags: Tag[] = [];
+    updateList: boolean = false;
 
     display: boolean = false;
-    update: boolean = false;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -65,25 +67,12 @@ export class RecipeListComponent implements OnInit {
 
         }
 
-    onUpdateList(event: Event){
-        this.update=true;
-    }
-
     selected(event: any): void {
         this.selectedRecipe = event;
     }
 
-//     onAdd(){
-//         this.updateQueryParameters();
-//     }
-//
-//     onRemove(){
-//         this.updateQueryParameters();
-//     }
 
-
-    updateQueryParameters(){
-//         this.update=false;
+    updateQueryParameters(event: any){
         this.router.navigate([], { relativeTo: this.route,
                                    queryParams: { tags: this.tags },
                                   });
@@ -91,14 +80,19 @@ export class RecipeListComponent implements OnInit {
 
 
     onSaved(event: any): void {
+        this.updateList = true;
         this.display=event;
-//         this.update=true;
+        this.getPopularTags();
     }
 
 
     getPopularTags(){
         this.tagsService.getAllTags().subscribe(successResponse => {
-            this.availableTags = successResponse.map(x => {return x.tagName});
+            this.availableTags = successResponse.map(x => {
+                this.fullTags.push(x);
+                return x.tagName
+            });
+            this.updateList = false;
         }, errorResponse => {
             console.log("Error")
         });
