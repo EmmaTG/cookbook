@@ -42,7 +42,7 @@
         <tr>
             <td colspan="7">
                 <div class="p-3">
-                    <app-recipe [recipe]="recipe"></app-recipe>
+                    <app-recipe [recipe]="recipe" (recipeDeleted)="deleteRecipeFromList($event)" (recipeUpdated)="updateRecipeInList($event)"></app-recipe>
                 </div>
             </td>
         </tr>

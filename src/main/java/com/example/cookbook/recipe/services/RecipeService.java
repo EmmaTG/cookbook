@@ -26,11 +26,16 @@ public class RecipeService {
         return recipeRepo.findById(recipeId);
     }
 
+    public Long countRecipesByTagId(Long tagId) { return recipeRepo.countRecipeByTagName(tagId);}
+
     public Optional<Tag> getTagByName(String tagName){ return tagRepo.findByName(tagName);}
 
     public void deleteRecipe(Long recipeId){
+//        recipeRepo.deleteRecipeFromJoinTable(recipeId);
+//        recipeRepo.deleteRecipeFromRecipes(recipeId);
         recipeRepo.deleteById(recipeId);
     }
+
 
     public Recipe saveRecipe(Recipe newRecipe){
         List<Tag> tags = newRecipe.getTags();
@@ -78,7 +83,7 @@ public class RecipeService {
         Set<Recipe> listOfRecipes = new HashSet<>();
         Set<Long> listOfIds = new HashSet<>();
         for (String tagName: tagList) {
-            listOfIds.addAll(recipeRepo.getRecipeByTagID(tagName));
+            listOfIds.addAll(recipeRepo.getRecipeByTagName(tagName));
         }
         for (Long id: listOfIds){
             Recipe recipe = getRecipeByID(id)

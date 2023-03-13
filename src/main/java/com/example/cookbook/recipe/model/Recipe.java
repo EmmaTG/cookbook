@@ -43,7 +43,7 @@ public class Recipe {
     @Column(name="notes")
     private String  notes;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name="recipe_tag",
             joinColumns = @JoinColumn(name="recipe_id", referencedColumnName = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name="tag_id", referencedColumnName = "tag_id"))

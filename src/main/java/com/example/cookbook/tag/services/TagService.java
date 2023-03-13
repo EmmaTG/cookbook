@@ -30,6 +30,8 @@ public class TagService {
         return tagRepo.saveAll(tags);
     }
 
+    public void deleteTagById(Long id) {tagRepo.deleteById(id);}
+
     public Tag updateTag(Long tagId, Tag changedTag){
         Tag tagToUpdate = getTagById(tagId)
                 .orElseThrow();

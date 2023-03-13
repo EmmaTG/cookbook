@@ -14,7 +14,8 @@ import {ConfirmationService} from 'primeng/api';
 export class RecipeComponent implements OnInit, OnChanges {
 
     @Input() recipe: Recipe;
-    @Output() recipeUpdated: EventEmitter<boolean> = new EventEmitter();
+    @Output() recipeDeleted: EventEmitter<number> = new EventEmitter();
+    @Output() recipeUpdated: EventEmitter<Recipe> = new EventEmitter();
 
     made: boolean = false;
     edit: boolean =false;
@@ -61,7 +62,7 @@ export class RecipeComponent implements OnInit, OnChanges {
                         this.made = true;
                         this.changeButtonStyle();
                         this.recipe = successResponse;
-//                         this.recipeUpdated.emit(true);
+//                         this.recipeUpdated.emit(recipe.id);
                     }, errorResponse => {
                         console.log('Error!!');
                     });
@@ -88,7 +89,7 @@ export class RecipeComponent implements OnInit, OnChanges {
                 }
                 this.recipesService.updateRecipe(this.editingRecipe).subscribe(successResponse => {
                         this.recipe = successResponse;
-                        this.recipeUpdated.emit(true);
+                        this.recipeUpdated.emit(this.editingRecipe);
                         this.editingRecipe= null;
                         this.tagStrings=[];
                         this.edit = false;
@@ -106,16 +107,16 @@ export class RecipeComponent implements OnInit, OnChanges {
         this.edit=true;
         this.editingRecipe = {...this.recipe};
         this.tagStrings = this.editingRecipe.tags.map(tag => tag.tagName);
-        console.log(this.tagStrings);
+//         console.log(this.tagStrings);
     }
 
     deleteRecipe(recipeToDelete: Recipe){
         this.recipesService.deleteRecipe(recipeToDelete.id).subscribe(() => {
-            this.recipeUpdated.emit(true);
-            console.log('Success!');
+            this.recipeDeleted.emit(recipeToDelete.id);
         }, errorResponse => {
             console.log('Error');
         })
+
     }
 
     onCancel() {

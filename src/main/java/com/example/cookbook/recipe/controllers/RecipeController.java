@@ -3,6 +3,7 @@ package com.example.cookbook.recipe.controllers;
 import com.example.cookbook.recipe.model.Recipe;
 import com.example.cookbook.recipe.services.RecipeService;
 import com.example.cookbook.tag.model.Tag;
+import com.example.cookbook.tag.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,8 @@ public class RecipeController {
 
     @Autowired
     RecipeService recipeService;
+    @Autowired
+    TagService tagService;
 
     //Get all recipes
     @GetMapping("/recipes")
@@ -100,7 +103,13 @@ public class RecipeController {
     @DeleteMapping("/recipes/{id}")
     public void deleteRecipe(@PathVariable(value = "id") Long id){
         Recipe recipe = recipeService.getRecipeByID(id).orElseThrow();
-//        recipe.getTags().forEach(tag -> tag.getRecipes().remove(recipe));
+        recipe.getTags().forEach(tag -> {
+            Long recipes = recipeService.countRecipesByTagId(tag.getId());
+            if (recipes == 1){
+                tagService.deleteTagById(tag.getId());
+            }
+        });
+//        System.out.println("Single tags deleted");
         recipeService.deleteRecipe(id);
     }
 

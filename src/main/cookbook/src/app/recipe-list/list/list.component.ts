@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 export class ListComponent implements OnInit, OnChanges {
 
     @Input() tags: string[];
-    @Input() update: boolean;
+//     @Input() update: boolean;
 
     @Output() recipe: EventEmitter<Recipe> = new EventEmitter();
 
@@ -43,12 +43,13 @@ export class ListComponent implements OnInit, OnChanges {
                             this.getRecipeFromTags();
                         return;
                         }
-                        case 'update': {
-                        if (this.update){
-                            this.getRecipeFromTags();
-                            }
-                        return;
-                        }
+//                         case 'update': {
+//                         if (this.update){
+//                             console.log("this.update");
+//                             this.getRecipeFromTags();
+//                             }
+//                         return;
+//                         }
                     }
                 } else {
                     if(propName==='tags'){
@@ -59,6 +60,20 @@ export class ListComponent implements OnInit, OnChanges {
                 }
             }
         }
+    }
+
+    deleteRecipeFromList(event) {
+        this.recipes = this.recipes.filter(x => (x.id !== event));
+    }
+
+    updateRecipeInList(event) {
+        const id: number = event.id;
+        this.recipes = this.recipes.map(x => {
+            if (x.id === id) {
+                return event;
+            }
+            return x;
+        });
     }
 
     sortByOption(): void {

@@ -70,20 +70,20 @@ export class RecipeListComponent implements OnInit {
     }
 
     selected(event: any): void {
-        this.selectedRecipe= event;
+        this.selectedRecipe = event;
     }
 
-    onAdd(){
-        this.updateQueryParameters();
-    }
-
-    onRemove(){
-        this.updateQueryParameters();
-    }
+//     onAdd(){
+//         this.updateQueryParameters();
+//     }
+//
+//     onRemove(){
+//         this.updateQueryParameters();
+//     }
 
 
     updateQueryParameters(){
-        this.update=false;
+//         this.update=false;
         this.router.navigate([], { relativeTo: this.route,
                                    queryParams: { tags: this.tags },
                                   });
@@ -92,7 +92,7 @@ export class RecipeListComponent implements OnInit {
 
     onSaved(event: any): void {
         this.display=event;
-        this.update=true;
+//         this.update=true;
     }
 
 
