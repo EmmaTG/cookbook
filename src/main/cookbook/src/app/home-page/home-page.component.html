@@ -24,10 +24,11 @@
     <div class="p-col-3"></div>
     <div class="p-col-6">
         <span class="p-fluid">
-                <p-multiSelect [options]="availableTags" placeholder="Select your ingredients" [(ngModel)]="selectedTags"
-                               optionLabel="name" display="chip" (onChange)="createTags($event)"></p-multiSelect>
+<!--                <p-multiSelect [options]="availableTags" placeholder="Select your ingredients" [(ngModel)]="selectedTags"-->
+<!--                               optionLabel="name" display="chip" (onChange)="createTags($event)"></p-multiSelect>-->
+            <p-autoComplete [(ngModel)]="selectedTags" [suggestions]="filteredTags" (completeMethod)="search($event)" [multiple]="true"></p-autoComplete>
 
-                <p-button label="Find a recipe" [routerLink]="['/recipes']" [queryParams]="{tags: tags}" [disabled]="tags.length<1"></p-button>
+                <p-button label="Find a recipe" [routerLink]="['/recipes']" [queryParams]="{tags: selectedTags}" [disabled]="selectedTags.length<1"></p-button>
         </span>
     </div>
 </div>

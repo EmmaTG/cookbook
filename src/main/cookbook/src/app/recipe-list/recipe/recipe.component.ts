@@ -86,7 +86,6 @@ export class RecipeComponent implements OnInit, OnChanges {
                     newTag.tagName = tag.toLowerCase();
                     this.editingRecipe.tags.push(newTag);
                 }
-                console.log(this.editingRecipe)
                 this.recipesService.updateRecipe(this.editingRecipe).subscribe(successResponse => {
                         this.recipe = successResponse;
                         this.recipeUpdated.emit(true);

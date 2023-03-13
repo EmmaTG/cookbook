@@ -15,6 +15,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {FieldsetModule} from 'primeng/fieldset';
 import {ConfirmationService} from 'primeng/api';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import { RecipeListRoutingModule } from './recipe-list-routing.module';
 import { ListComponent } from './list/list.component';
@@ -45,6 +46,7 @@ import { CapitalFirstLetterPipe } from '../@common/capital-first-letter.pipe';
             ConfirmPopupModule,
             FieldsetModule,
             FormsModule,
+            AutoCompleteModule
         ],
     providers: [ConfirmationService]
 })

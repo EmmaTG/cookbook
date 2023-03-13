@@ -14,6 +14,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {ChipsModule} from 'primeng/chips';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 
@@ -31,6 +32,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     ChipsModule,
     NewRecipeModule,
     InputSwitchModule,
+    AutoCompleteModule,
     MultiSelectModule
   ]
 })

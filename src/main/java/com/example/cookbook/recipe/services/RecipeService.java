@@ -52,6 +52,7 @@ public class RecipeService {
         recipeToUpdate.setLocation(newRecipe.getLocation());
         recipeToUpdate.setCookTime(newRecipe.getCookTime());
         recipeToUpdate.setDateLastMade(newRecipe.getDateLastMade());
+        recipeToUpdate.setNotes(newRecipe.getNotes());
 
         for (Tag t : newRecipe.getTags()){
             String title = t.getTagName();
