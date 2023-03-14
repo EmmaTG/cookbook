@@ -1,39 +1,53 @@
-<div class="p-grid">
-    <span class="p-col-12"></span>
+<div class="grid">
+    <span class="col-12"></span>
 </div>
-<div class="p-grid">
-    <div class="p-col-8">
+<div class="grid">
+    <div class="col-10"></div>
+
+    <div class="col-2">
+        <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-bars" class="p-button-secondary" label="List All Recipes"
+                style="text-align: right"></button>
     </div>
-<!--    <div class="p-col-4"></div>-->
-    <div class="p-col-2">
-        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary" label="New Recipe"></button>
-        <p-dialog header="New Recipe" [(visible)]="display" position="right" [style]="{width: '50vw'}">
-            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags" ></app-new-recipe>
+</div>
+<div class="grid">
+    <div class="col-10"></div>
+
+    <div class="col-2">
+        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary" label="Add New Recipe"
+                style="text-align: right"></button>
+        <p-dialog header="New Recipe" [(visible)]="display" position="right" style="width: '50vw'">
+            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>
         </p-dialog>
     </div>
 </div>
-<div class="p-grid">
-    <div class="p-col-12">
+
+<div class="grid">
+    <div class="col-12">
         <div style="text-align: center">
-            <h1>Welcome</h1><img src="../../assets/images/mascot.png" alt="penguin mascot" height="300" width="265"/>
+            <h1>Welcome</h1><img src="../../assets/images/mascot.png" alt="penguin mascot" height="270" width="238"/>
             <h3>With what ingredients do you want to cook?</h3>
         </div>
     </div>
 </div>
-<div class="p-grid">
-    <div class="p-col-3"></div>
-    <div class="p-col-6">
-        <span class="p-fluid">
+<div class="grid">
+    <div class="col-3"></div>
+    <div class="col">
 <!--                <p-multiSelect [options]="availableTags" placeholder="Select your ingredients" [(ngModel)]="selectedTags"-->
 <!--                               optionLabel="name" display="chip" (onChange)="createTags($event)"></p-multiSelect>-->
-            <p-autoComplete [(ngModel)]="selectedTags" [suggestions]="filteredTags" (completeMethod)="search($event)" [multiple]="true"></p-autoComplete>
+            <p-autoComplete [(ngModel)]="selectedTags" [suggestions]="filteredTags" (completeMethod)="search($event)" [multiple]="true"
+                            class="p-fluid" placeholder="Start typing to select ingredients"></p-autoComplete>
 
-                <p-button label="Find a recipe" [routerLink]="['/recipes']" [queryParams]="{tags: selectedTags}" [disabled]="selectedTags.length<1"></p-button>
-        </span>
     </div>
+    <div class="col-3"></div>
 </div>
 
 
-<div class="p-col-2">
-    <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-plus" class="p-button-secondary" label="List All Recipes"></button>
+<div class="grid">
+
+    <div class="col-3"></div>
+    <div class="col"  style="text-align: center">
+        <p-button label="Find a recipe" [routerLink]="['/recipes']" [queryParams]="{tags: selectedTags}" [disabled]="selectedTags.length<1"
+                class="p-fluid"></p-button>
+    </div>
+    <div class="col-3"></div>
 </div>

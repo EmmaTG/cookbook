@@ -26,7 +26,7 @@ export class NewRecipeComponent implements OnInit{
     stringTags: string[] = [];
     filteredTags : String[] = [];
     selectedTags: Tag[] = [];
-    newIngredientMessage: string = "Ingredient not in List"
+    newIngredientMessage: string = "Click to add ingredient not in list"
 
     recipe: Recipe;
 

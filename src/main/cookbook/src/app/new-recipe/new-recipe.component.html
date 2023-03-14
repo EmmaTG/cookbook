@@ -1,9 +1,9 @@
 
 <form #newRecipe="ngForm" (submit)="onSubmit()">
-    <div class="p-field">
-        <div class="p-grid">
-          <label for="titleID" class="p-col-2">*Title: </label>
-            <div class="p-col">
+    <div class="field">
+        <div class="grid">
+          <label for="titleID" class="col-2">*Title: </label>
+            <div class="col">
                 <input type="text" id="titleID" pInputText [(ngModel)]="recipe.title" name="title"
                        #title="ngModel" [style]="{'width':'100%'}" required/>
                 <div *ngIf="title.errors && (title.dirty || title.touched)" style="color: red" class="error">
@@ -13,19 +13,19 @@
         </div>
     </div>
 
-    <div class="p-field">
-        <div class="p-grid">
-          <label for="locationID" class="p-col-2">*Location: </label>
-            <div class="p-col">
+    <div class="field">
+        <div class="grid">
+          <label for="locationID" class="col-2">*Location: </label>
+            <div class="col">
                 <input type="text" id="locationID" pInputText [(ngModel)]="recipe.location" name="location" [style]="{'width':'100%'}"/>
             </div>
         </div>
     </div>
 
-    <div class="p-field">
-        <div class="p-grid p-formgrid">
-          <label class="p-col-2">*Cooking Time: </label>
-            <div class="p-col">
+    <div class="field">
+        <div class="grid formgrid">
+          <label class="col-2">*Cooking Time: </label>
+            <div class="col">
                 <p-inputMask mask="99 hr 99 min" placeholder="00hr 00min" id="cookTimeID" pInputText
                              [(ngModel)]="recipe.cookTime" name="time" #cookTime="ngModel"
                              [style]="{'width':'100%'}" required></p-inputMask>
@@ -36,44 +36,45 @@
         </div>
     </div>
 
-    <div class="p-field">
-        <div class="p-grid p-formgrid">
-            <label class="p-col-2">*Ingredients: </label>
+    <div class="field">
+        <div class="grid formgrid">
+            <label class="col-2">*Ingredients: </label>
+            <div class="col">
                 <p-autoComplete [(ngModel)]="selectedTags" [suggestions]="filteredTags" (completeMethod)="search($event)" field="tagName" [multiple]="true"
-                (onSelect)="tagSelected($event)"></p-autoComplete>
-            <span class="p-col-1"></span>
-            <span class="ui-danger p-col-10">
+                (onSelect)="tagSelected($event)" class="p-fluid" placeholder="Start typing to select ingredients"></p-autoComplete>
+            </div>
+            <span class="ui-danger col-10">
                 <small>Enter the main ingredients of this recipe </small>
             </span>
-            <div class="p-col"></div>
-            <div class="p-col-10-fluid">
+            <div class="col"></div>
+            <div class="col-10-fluid">
                 <div *ngIf="newIngredient">
                     <p-chips [(ngModel)]="stringTags" name="tags" placeholder="Enter ingredients separated by a comma"
-                             class="p-col-10-fluid" separator="," #tags="ngModel"></p-chips>
+                             class="col-10-fluid" separator="," #tags="ngModel"></p-chips>
 
                 </div>
             </div>
 <!--            <div *ngIf="((selectedTags.length<1) && (stringTags.length<1)) && (multiselect.touched)" style="color: red" class="error">-->
 <!--                At least one ingredient is Required-->
 <!--            </div>-->
-            <div class="p-col"></div>
+            <div class="col"></div>
         </div>
     </div>
 
-    <div class="p-field">
-        <div class="p-grid p-formgrid">
-            <label class="p-col-2"> Notes: </label>
-            <div class="p-col">
+    <div class="field">
+        <div class="grid formgrid">
+            <label class="col-2"> Notes: </label>
+            <div class="col">
             <textarea pInputTextarea [(ngModel)]="recipe.notes" name="notes" [style]="{'width':'100%'}"></textarea>
             </div>
         </div>
     </div>
     <small >* Required fields</small>
 
-    <div class="p-grid p-formgrid">
-        <div class="p-col-10"></div>
-        <p-button type="submit" icon="pi pi-check" label="Save" class="p-col-1"
+    <div class="grid formgrid">
+        <div class="col-10"></div>
+        <p-button type="submit" icon="pi pi-check" label="Save" class="col-1"
         [disabled]="!newRecipe.form.valid || (stringTags.length<1 && selectedTags.length<1) "></p-button>
-        <div class="p-col"></div>
+        <div class="pcol"></div>
     </div>
 </form>
