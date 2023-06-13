@@ -41,8 +41,10 @@ export class ListComponent implements OnInit, OnChanges {
                 if (!changes[propName].firstChange){
                     switch(propName){
                         case 'tags': {
-                            let prevValue = JSON.stringify(changes.tags.previousValue.sort());
-                            let currValue = JSON.stringify(changes.tags.currentValue.sort());
+                            let prevValue = changes.tags.previousValue || [];
+                            prevValue = JSON.stringify(prevValue.sort());
+                            let currValue = changes.tags.currentValue || [];
+                            currValue = JSON.stringify(currValue.sort());
                             if (currValue !== prevValue){
                                 this.getRecipeFromTags();
                             }
@@ -86,6 +88,13 @@ export class ListComponent implements OnInit, OnChanges {
                         let aTagNumber = a.tags.filter(val => this.tags.includes(val.tagName.toLowerCase())).length;
                         let bTagNumber = b.tags.filter(val => this.tags.includes(val.tagName.toLowerCase())).length;
                         return bTagNumber-aTagNumber;
+                        }
+                    if (this.sortBy=="dateLastMade"){
+                        let aDate = a[this.sortBy] || 0;
+                        let bDate = b[this.sortBy] || 0;
+                        const date1 = new Date(aDate).getTime();
+                        const date2 = new Date(bDate).getTime();
+                        return date2-date1;
                         }
                    return a[this.sortBy].localeCompare(b[this.sortBy]);
             });

@@ -1,25 +1,24 @@
 <div class="grid">
     <span class="col-12"></span>
 </div>
-<div class="grid">
-    <div class="col-10"></div>
+<!--<div class="grid">-->
+<!--    <div class="col-10"></div>-->
 
-    <div class="col-2">
-        <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-bars" class="p-button-secondary" label="List All Recipes"
-                style="text-align: right"></button>
-    </div>
-</div>
-<div class="grid">
-    <div class="col-10"></div>
+<!--    <div class="col-2">-->
+<!--        <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-bars" class="p-button-secondary right-align-content" label="List All Recipes"></button>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="grid">-->
+<!--    <div class="col-10"></div>-->
 
-    <div class="col-2">
-        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary" label="Add New Recipe"
-                style="text-align: right"></button>
-        <p-dialog header="New Recipe" [(visible)]="display" position="right" style="width: '50vw'">
-            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>
-        </p-dialog>
-    </div>
-</div>
+<!--    <div class="col-2">-->
+<!--        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary right-align-content" label="Add New Recipe"-->
+<!--                style="text-align: right"></button>-->
+<!--        <p-dialog header="New Recipe" [(visible)]="display" position="right" style="width: '60vw'">-->
+<!--            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>-->
+<!--        </p-dialog>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="grid">
     <div class="col-12">
@@ -30,7 +29,7 @@
     </div>
 </div>
 <div class="grid">
-    <div class="col-3"></div>
+    <div class="col-4"></div>
     <div class="col">
 <!--                <p-multiSelect [options]="availableTags" placeholder="Select your ingredients" [(ngModel)]="selectedTags"-->
 <!--                               optionLabel="name" display="chip" (onChange)="createTags($event)"></p-multiSelect>-->
@@ -38,16 +37,64 @@
                             class="p-fluid" placeholder="Start typing to select ingredients"></p-autoComplete>
 
     </div>
-    <div class="col-3"></div>
+    <div class="col-4">
+<!--        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary right-align-content" label="Add New Recipe"></button>-->
+<!--&lt;!&ndash;                style="text-align: right; float: right;"&ndash;&gt;-->
+
+<!--        <p-dialog header="New Recipe" [(visible)]="display" position="right" style="width: '50vw'">-->
+<!--            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>-->
+<!--        </p-dialog>-->
+    </div>
+<!--    <div class="col-2"></div>-->
 </div>
 
 
 <div class="grid">
 
-    <div class="col-3"></div>
+    <div class="col-4"></div>
     <div class="col"  style="text-align: center">
-        <p-button label="Find a recipe" [routerLink]="['/recipes']" [queryParams]="{tags: selectedTags}" [disabled]="selectedTags.length<1"
+        <p-button label="Find a recipe" icon="pi pi-search" [routerLink]="['/recipes']" [queryParams]="{tags: selectedTags}" [disabled]="selectedTags.length<1"
                 class="p-fluid"></p-button>
     </div>
-    <div class="col-3"></div>
+    <div class="col-4">
+<!--        <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-bars" class="p-button-secondary right-align-content" label="List All Recipes"-->
+<!--                style="text-align: right"></button>-->
+    </div>
+<!--    <div class="col-2"></div>-->
 </div>
+
+
+<div class="grid">
+
+    <div class="col-4"></div>
+    <div class="col-2"  style="text-align: center">
+        <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-bars" class="p-button-secondary" style="width: 100%" label="List All Recipes"></button>
+    </div>
+
+    <div class="col-2"  style="text-align: center">
+        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary p-fluid" style="width: 100%" label="Add New Recipe"></button>
+        <p-dialog header="New Recipe" [(visible)]="display" position="right" style="width: '60vw'">
+            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>
+        </p-dialog>
+    </div>
+    <div class="col-4">
+    </div>
+    <!--    <div class="col-2"></div>-->
+</div>
+
+
+<!--<div class="grid">-->
+
+<!--    <div class="col-4"></div>-->
+<!--    <div class="col"  style="text-align: center">-->
+<!--        <button pButton type="text" (click)="display = true" icon="pi pi-plus" class="p-button-secondary p-fluid" style="width: 100%" label="Add New Recipe"></button>-->
+<!--        <p-dialog header="New Recipe" [(visible)]="display" position="bottom" style="width: '60vw'">-->
+<!--            <app-new-recipe (saved)="onSaved($event)" [fullTags]="fullTags"></app-new-recipe>-->
+<!--        </p-dialog>-->
+<!--    </div>-->
+<!--    <div class="col-4">-->
+<!--        &lt;!&ndash;        <button pButton type="text" [routerLink]="['/recipes']" icon="pi pi-bars" class="p-button-secondary right-align-content" label="List All Recipes"&ndash;&gt;-->
+<!--        &lt;!&ndash;                style="text-align: right"></button>&ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash;    <div class="col-2"></div>&ndash;&gt;-->
+<!--</div>-->

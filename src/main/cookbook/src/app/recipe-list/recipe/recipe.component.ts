@@ -62,7 +62,7 @@ export class RecipeComponent implements OnInit, OnChanges {
                         this.made = true;
                         this.changeButtonStyle();
                         this.recipe = successResponse;
-//                         this.recipeUpdated.emit(recipe.id);
+                        this.recipeUpdated.emit(recipe);
                     }, errorResponse => {
                         console.log('Error!!');
                     });
