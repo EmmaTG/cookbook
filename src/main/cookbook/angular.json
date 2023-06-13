@@ -126,7 +126,6 @@
       }
     }
   },
-  "defaultProject": "cookbook",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"
